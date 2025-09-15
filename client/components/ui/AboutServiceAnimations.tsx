@@ -1,5 +1,5 @@
 import { motion, useAnimation, useInView, useMotionValue, useReducedMotion, useSpring, useTransform, useScroll } from "framer-motion";
-import { useCallback, useEffect, useMemo, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 function clamp(n: number, min: number, max: number) {
   return Math.max(min, Math.min(max, n));
@@ -100,75 +100,101 @@ function TiltCard({ children, className = "" }: { children: React.ReactNode; cla
   );
 }
 
-function ChatScene() {
+function TypeLine({ text, startDelay = 0, speed = 30, loop = true, className = "" }: { text: string; startDelay?: number; speed?: number; loop?: boolean; className?: string }) {
+  const [started, setStarted] = useState(false);
+  const [i, setI] = useState(0);
+  useEffect(() => { const t = setTimeout(() => setStarted(true), startDelay); return () => clearTimeout(t); }, [startDelay]);
+  useEffect(() => {
+    if (!started) return;
+    if (i <= text.length) {
+      const id = setTimeout(() => setI((v) => v + 1), speed);
+      return () => clearTimeout(id);
+    }
+    if (loop) {
+      const id = setTimeout(() => setI(0), 1200);
+      return () => clearTimeout(id);
+    }
+  }, [i, started, text, speed, loop]);
+  return (
+    <div className={className}>
+      <span>{text.slice(0, Math.min(i, text.length))}</span>
+      <motion.span className="inline-block w-0.5 h-4 align-[-2px] bg-current ml-0.5" animate={{ opacity: [1, 0] }} transition={{ duration: 0.8, repeat: Infinity }} />
+    </div>
+  );
+}
+
+function PhoneChatScene() {
   return (
     <TiltCard>
-      <div className="h-72 md:h-80 lg:h-96 bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl relative overflow-hidden">
-        {[...Array(18)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-3 h-3 bg-white/30 rounded-full"
-            animate={{ x: [0, Math.random() * 320 - 160], y: [0, Math.random() * 160 - 80], opacity: [0, 1, 0] }}
-            transition={{ duration: 4 + Math.random() * 3, repeat: Infinity, delay: Math.random() * 3 }}
-            style={{ left: `${6 + i * 5}%`, top: `${16 + i * 3}%` }}
-          />
-        ))}
-        <motion.div
-          animate={{ opacity: [0, 1, 1, 0], x: [-80, 0, 0, -80] }}
-          transition={{ duration: 6, repeat: Infinity, times: [0, 0.2, 0.8, 1] }}
-          className="absolute top-10 left-6 bg-white/95 backdrop-blur px-6 py-4 rounded-xl shadow-lg max-w-xl"
-        >
-          <p className="text-lg text-gray-800">Hola, ¿cómo podemos ayudarte hoy?</p>
-        </motion.div>
-        <motion.div
-          animate={{ opacity: [0, 1, 1, 0], x: [80, 0, 0, 80] }}
-          transition={{ duration: 6, repeat: Infinity, delay: 1.6, times: [0, 0.2, 0.8, 1] }}
-          className="absolute top-32 right-6 bg-blue-500/95 text-white px-6 py-4 rounded-xl shadow-lg max-w-xl"
-        >
-          <p className="text-lg">Queremos diseñar tu sitio web.</p>
-        </motion.div>
-        <motion.div
-          animate={{ opacity: [0, 1, 1, 0], x: [-80, 0, 0, -80] }}
-          transition={{ duration: 6, repeat: Infinity, delay: 3.2, times: [0, 0.2, 0.8, 1] }}
-          className="absolute bottom-8 left-6 bg-white/95 backdrop-blur px-6 py-4 rounded-xl shadow-lg max-w-xl"
-        >
-          <p className="text-lg text-gray-800">¡Perfecto! Cuéntanos más sobre tu idea.</p>
-        </motion.div>
+      <div className="flex justify-center">
+        <div className="relative w-[220px] sm:w-[260px] md:w-[300px] lg:w-[340px] aspect-[9/19] rounded-[3rem] bg-neutral-900 shadow-2xl">
+          <div className="absolute inset-[8px] rounded-[2.6rem] bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900 dark:to-blue-800 overflow-hidden">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-6 bg-black/80 rounded-b-2xl" />
+            <div className="absolute top-2 left-4 right-4 flex items-center justify-between text-[10px] text-black/60 dark:text-white/70">
+              <span>9:41</span>
+              <span className="flex items-center gap-1">
+                <span className="w-3 h-2 bg-black/40 dark:bg-white/30 rounded-sm" />
+                <span className="w-3 h-2 bg-black/40 dark:bg-white/30 rounded-sm" />
+                <span className="w-3 h-2 bg-black/40 dark:bg-white/30 rounded-sm" />
+              </span>
+            </div>
+            <div className="absolute inset-0 pt-8 px-3">
+              <div className="space-y-3">
+                <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }} className="max-w-[78%] rounded-2xl rounded-tl-sm bg-white text-gray-900 px-3 py-2 shadow">
+                  Hola, ¿cómo podemos ayudarte hoy?
+                </motion.div>
+                <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, delay: 0.4 }} className="ml-auto max-w-[78%] rounded-2xl rounded-tr-sm bg-blue-500 text-white px-3 py-2 shadow">
+                  Queremos diseñar tu sitio web.
+                </motion.div>
+                <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, delay: 0.8 }} className="max-w-[78%] rounded-2xl rounded-tl-sm bg-white text-gray-900 px-3 py-2 shadow">
+                  ¡Perfecto! Cuéntanos más sobre tu idea.
+                </motion.div>
+                <motion.div className="flex items-center gap-1 pl-2 text-gray-600" animate={{ opacity: [0.2, 1, 0.2] }} transition={{ duration: 1.8, repeat: Infinity, delay: 1.2 }}>
+                  <span className="w-1.5 h-1.5 rounded-full bg-gray-600" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-gray-600" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-gray-600" />
+                </motion.div>
+              </div>
+            </div>
+          </div>
+          <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-28 h-1.5 bg-black/40 rounded-full blur-sm" />
+        </div>
       </div>
-      <p className="mt-6 text-center font-bold text-gray-900 dark:text-gray-100 text-xl">Hablamos de tu proyecto</p>
+      <p className="mt-6 text-center font-bold text-gray-900 dark:text-gray-100 text-xl">Planeamos tu proyecto</p>
     </TiltCard>
   );
 }
 
-function CodeScene() {
+function MonitorCodeScene() {
   return (
     <TiltCard>
-      <div className="relative">
-        <div className="w-full h-12 bg-gray-900 rounded-t-2xl flex items-center gap-2 px-4">
-          <span className="w-2.5 h-2.5 rounded-full bg-red-500" />
-          <span className="w-2.5 h-2.5 rounded-full bg-yellow-500" />
-          <span className="w-2.5 h-2.5 rounded-full bg-green-500" />
-          <span className="ml-3 text-xs text-white/60">Proyecto: sitio-marca</span>
-        </div>
-        <div className="bg-black rounded-b-2xl p-0 h-72 md:h-80 lg:h-96 relative overflow-hidden">
-          <div className="absolute inset-y-0 left-0 w-10 bg-gray-900/70 text-gray-500 text-xs font-mono grid content-start pt-4 px-2">
-            {Array.from({ length: 20 }).map((_, i) => (
-              <span key={i} className="leading-6">{i + 1}</span>
-            ))}
+      <div className="relative flex flex-col items-center">
+        <div className="w-full max-w-3xl">
+          <div className="h-12 bg-gray-900 rounded-t-2xl flex items-center gap-2 px-4">
+            <span className="w-2.5 h-2.5 rounded-full bg-red-500" />
+            <span className="w-2.5 h-2.5 rounded-full bg-yellow-500" />
+            <span className="w-2.5 h-2.5 rounded-full bg-green-500" />
+            <span className="ml-3 text-xs text-white/60">Editor — diseño y revisión</span>
           </div>
-          <div className="pl-12 pr-4 pt-4">
-            <motion.pre className="text-green-400 font-mono text-sm md:text-base leading-7">
-              <motion.div animate={{ opacity: [0, 1] }} transition={{ duration: 0.6, repeat: Infinity, repeatDelay: 2 }}>const design = await createWebsite();</motion.div>
-              <motion.div animate={{ opacity: [0, 1] }} transition={{ duration: 0.6, repeat: Infinity, repeatDelay: 2, delay: 0.4 }}>function optimizePerformance() {"{"}</motion.div>
-              <motion.div animate={{ opacity: [0, 1] }} transition={{ duration: 0.6, repeat: Infinity, repeatDelay: 2, delay: 0.9 }}>&nbsp;&nbsp;return responsive && fast;</motion.div>
-              <motion.div animate={{ opacity: [0, 1] }} transition={{ duration: 0.6, repeat: Infinity, repeatDelay: 2, delay: 1.3 }}>{"}"}</motion.div>
-            </motion.pre>
+          <div className="bg-black rounded-b-2xl h-72 md:h-80 lg:h-96 relative overflow-hidden">
+            <div className="absolute inset-y-0 left-0 w-10 bg-gray-900/70 text-gray-500 text-xs font-mono grid content-start pt-4 px-2">
+              {Array.from({ length: 18 }).map((_, i) => (
+                <span key={i} className="leading-6">{i + 1}</span>
+              ))}
+            </div>
+            <div className="pl-12 pr-4 pt-6">
+              <TypeLine text="const design = await createWebsite();" startDelay={200} speed={22} className="text-emerald-400 font-mono text-sm md:text-base leading-7" />
+              <TypeLine text="function optimizePerformance() {" startDelay={1100} speed={22} className="text-emerald-400 font-mono text-sm md:text-base leading-7" />
+              <TypeLine text="  return responsive && fast;" startDelay={2000} speed={22} className="text-emerald-400 font-mono text-sm md:text-base leading-7" />
+              <TypeLine text="}" startDelay={2700} speed={22} className="text-emerald-400 font-mono text-sm md:text-base leading-7" />
+            </div>
+            <motion.div className="absolute bottom-4 left-12 right-6 h-3 rounded bg-emerald-600/30">
+              <motion.div className="h-3 rounded bg-emerald-500" animate={{ width: ["10%", "94%", "62%", "100%"] }} transition={{ duration: 6, repeat: Infinity }} />
+            </motion.div>
+            <motion.div className="absolute top-4 right-4 text-emerald-400 text-xs" animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 2, repeat: Infinity }}>Lighthouse 95+</motion.div>
           </div>
-          <motion.div className="absolute bottom-4 left-12 right-6 h-3 rounded bg-emerald-600/30">
-            <motion.div className="h-3 rounded bg-emerald-500" animate={{ width: ["8%", "94%", "62%", "100%"] }} transition={{ duration: 6, repeat: Infinity }} />
-          </motion.div>
-          <motion.div className="absolute top-4 right-4 text-emerald-400 text-xs" animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 2, repeat: Infinity }}>Lighthouse 95+</motion.div>
-          <motion.div className="absolute inset-0" style={{ background: "radial-gradient(1000px circle at 80% 20%, rgba(255,255,255,0.05), transparent 40%)" }} />
+          <div className="w-28 h-6 bg-gray-700 mx-auto rounded-b-md mt-2" />
+          <div className="w-16 h-4 bg-gray-800 mx-auto rounded-b-md" />
         </div>
       </div>
       <p className="mt-6 text-center font-bold text-gray-900 dark:text-gray-100 text-xl">Diseñamos y revisamos</p>
@@ -246,9 +272,10 @@ function HostingScene() {
         <motion.div
           animate={{ scale: [1, 1.2, 1], rotate: [0, 12, 0] }}
           transition={{ duration: 3, repeat: Infinity }}
-          className="absolute bottom-6 right-6 w-12 h-12 bg-primary rounded-full grid place-items-center text-white text-2xl shadow-lg"
+          className="absolute top-6 right-8 w-40 h-28 bg-gray-300/80 dark:bg-gray-600/70 rounded-full"
         >
-          ✓
+          <div className="absolute top-6 left-6 w-28 h-16 bg-gray-200/80 dark:bg-gray-700/80 rounded-full" />
+          <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-6 h-6 bg-primary rounded-full grid place-items-center text-white text-sm shadow">✓</div>
         </motion.div>
       </div>
       <p className="mt-6 text-center font-bold text-gray-900 dark:text-gray-100 text-xl">Hosting y despliegue</p>
@@ -337,8 +364,8 @@ export function AboutServiceAnimations() {
       <ParallaxBackground mouseX={mouseX} mouseY={mouseY} reduce={reduce} />
 
       <div className="grid w-full max-w-7xl gap-10 md:gap-12 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
-        <motion.div variants={itemVariants}><ChatScene /></motion.div>
-        <motion.div variants={itemVariants}><CodeScene /></motion.div>
+        <motion.div variants={itemVariants}><PhoneChatScene /></motion.div>
+        <motion.div variants={itemVariants}><MonitorCodeScene /></motion.div>
         <motion.div className="xl:block md:col-span-2 xl:col-span-1" variants={itemVariants}><HostingScene /></motion.div>
       </div>
 
