@@ -1,4 +1,12 @@
-import { motion, useAnimation, useInView, useMotionValue, useReducedMotion, useTransform, useScroll } from "framer-motion";
+import {
+  motion,
+  useAnimation,
+  useInView,
+  useMotionValue,
+  useReducedMotion,
+  useTransform,
+  useScroll,
+} from "framer-motion";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 function clamp(n: number, min: number, max: number) {
@@ -115,8 +123,21 @@ function PhoneChatScene() {
 }
 
 type CodeToken = { t: string; c?: string };
-function TokenTypeLine({ tokens, startDelay = 0, speed = 24, loop = false }: { tokens: CodeToken[]; startDelay?: number; speed?: number; loop?: boolean }) {
-  const totalLen = useMemo(() => tokens.reduce((acc, tk) => acc + tk.t.length, 0), [tokens]);
+function TokenTypeLine({
+  tokens,
+  startDelay = 0,
+  speed = 24,
+  loop = false,
+}: {
+  tokens: CodeToken[];
+  startDelay?: number;
+  speed?: number;
+  loop?: boolean;
+}) {
+  const totalLen = useMemo(
+    () => tokens.reduce((acc, tk) => acc + tk.t.length, 0),
+    [tokens],
+  );
   const [started, setStarted] = useState(false);
   const [pos, setPos] = useState(0);
   const offsets = useMemo(() => {
@@ -154,11 +175,17 @@ function TokenTypeLine({ tokens, startDelay = 0, speed = 24, loop = false }: { t
         const show = clamp(pos - start, 0, tk.t.length);
         const content = tk.t.slice(0, show);
         return (
-          <span key={i} className={tk.c}>{content}</span>
+          <span key={i} className={tk.c}>
+            {content}
+          </span>
         );
       })}
       {pos <= totalLen && (
-        <motion.span className="inline-block w-0.5 h-4 align-[-2px] bg-white/80 ml-0.5" animate={{ opacity: [1, 0] }} transition={{ duration: 0.7, repeat: Infinity }} />
+        <motion.span
+          className="inline-block w-0.5 h-4 align-[-2px] bg-white/80 ml-0.5"
+          animate={{ opacity: [1, 0] }}
+          transition={{ duration: 0.7, repeat: Infinity }}
+        />
       )}
     </pre>
   );
@@ -190,23 +217,39 @@ function MonitorCodeScene() {
           <div className="relative mx-4 mb-4 rounded-xl overflow-hidden bg-black ring-1 ring-neutral-800 h-[28rem] md:h-[32rem] lg:h-[36rem]">
             {/* Tabs */}
             <div className="h-9 flex items-center gap-2 px-3 bg-neutral-900/80 border-b border-neutral-800">
-              <div className="px-2.5 py-1 text-xs rounded bg-neutral-800 text-neutral-200">App.tsx</div>
-              <div className="px-2.5 py-1 text-xs rounded text-neutral-400">styles.css</div>
-              <div className="px-2.5 py-1 text-xs rounded text-neutral-400">README.md</div>
-              <div className="ml-auto text-[10px] text-neutral-500">UTF-8 • LF • React • TypeScript</div>
+              <div className="px-2.5 py-1 text-xs rounded bg-neutral-800 text-neutral-200">
+                App.tsx
+              </div>
+              <div className="px-2.5 py-1 text-xs rounded text-neutral-400">
+                styles.css
+              </div>
+              <div className="px-2.5 py-1 text-xs rounded text-neutral-400">
+                README.md
+              </div>
+              <div className="ml-auto text-[10px] text-neutral-500">
+                UTF-8 • LF • React • TypeScript
+              </div>
             </div>
 
             {/* Code area */}
             <div className="relative p-4 md:p-6 h-[calc(100%-2.25rem)] overflow-hidden">
               {/* Scanlines */}
-              <div className="pointer-events-none absolute inset-0 opacity-[0.08] mix-blend-soft-light" style={{ backgroundImage: "repeating-linear-gradient(0deg, rgba(255,255,255,0.05) 0, rgba(255,255,255,0.05) 1px, transparent 1px, transparent 3px)" }} />
+              <div
+                className="pointer-events-none absolute inset-0 opacity-[0.08] mix-blend-soft-light"
+                style={{
+                  backgroundImage:
+                    "repeating-linear-gradient(0deg, rgba(255,255,255,0.05) 0, rgba(255,255,255,0.05) 1px, transparent 1px, transparent 3px)",
+                }}
+              />
               {/* Glow */}
               <div className="pointer-events-none absolute -inset-10 bg-[radial-gradient(700px_circle_at_20%_10%,rgba(255,255,255,0.05),transparent_40%)]" />
 
               {/* Line numbers */}
               <div className="absolute left-0 top-9 bottom-0 w-8 bg-neutral-950/70 text-neutral-600 text-[11px] font-mono grid content-start pt-6 px-2">
                 {Array.from({ length: 26 }).map((_, i) => (
-                  <span key={i} className="leading-7">{i + 1}</span>
+                  <span key={i} className="leading-7">
+                    {i + 1}
+                  </span>
                 ))}
               </div>
 
@@ -260,9 +303,15 @@ function MonitorCodeScene() {
                     { t: "{", c: "text-neutral-500" },
                     { t: " const ", c: "text-sky-400" },
                     { t: "t", c: "text-emerald-300" },
-                    { t: " = setTimeout(() => setReady(true), ", c: "text-neutral-300" },
+                    {
+                      t: " = setTimeout(() => setReady(true), ",
+                      c: "text-neutral-300",
+                    },
                     { t: "600", c: "text-amber-300" },
-                    { t: "); return () => clearTimeout(t); }", c: "text-neutral-300" },
+                    {
+                      t: "); return () => clearTimeout(t); }",
+                      c: "text-neutral-300",
+                    },
                     { t: ", []);", c: "text-neutral-500" },
                   ]}
                 />
@@ -285,7 +334,11 @@ function MonitorCodeScene() {
                     { t: ">)", c: "text-neutral-500" },
                   ]}
                 />
-                <TokenTypeLine startDelay={3150} speed={18} tokens={[{ t: "}", c: "text-neutral-500" }]} />
+                <TokenTypeLine
+                  startDelay={3150}
+                  speed={18}
+                  tokens={[{ t: "}", c: "text-neutral-500" }]}
+                />
                 <TokenTypeLine
                   startDelay={3400}
                   speed={18}
@@ -354,14 +407,33 @@ function BeamsOverlay() {
           strokeLinecap="round"
           strokeDasharray="12 16"
           animate={{ strokeDashoffset: [0, -56] }}
-          transition={{ duration: 2.5 + i * 0.4, repeat: Infinity, ease: "linear" }}
+          transition={{
+            duration: 2.5 + i * 0.4,
+            repeat: Infinity,
+            ease: "linear",
+          }}
         />
       ))}
       <defs>
-        <linearGradient id="g" x1="0" y1="0" x2="400" y2="0" gradientUnits="userSpaceOnUse">
+        <linearGradient
+          id="g"
+          x1="0"
+          y1="0"
+          x2="400"
+          y2="0"
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.2" />
-          <stop offset="50%" stopColor="hsl(var(--primary))" stopOpacity="0.9" />
-          <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.2" />
+          <stop
+            offset="50%"
+            stopColor="hsl(var(--primary))"
+            stopOpacity="0.9"
+          />
+          <stop
+            offset="100%"
+            stopColor="hsl(var(--primary))"
+            stopOpacity="0.2"
+          />
         </linearGradient>
       </defs>
     </svg>
@@ -393,7 +465,11 @@ function HostingScene() {
                   className="absolute left-4 right-4 h-4 bg-gray-400/80 dark:bg-gray-600/80 rounded"
                   style={{ top: 14 + r * 26 }}
                   animate={{ opacity: [0.5, 1, 0.5] }}
-                  transition={{ duration: 1, repeat: Infinity, delay: i * 0.2 + r * 0.2 }}
+                  transition={{
+                    duration: 1,
+                    repeat: Infinity,
+                    delay: i * 0.2 + r * 0.2,
+                  }}
                 />
               ))}
               <motion.div className="absolute -top-3 left-1/2 -translate-x-1/2 text-[10px] font-bold text-gray-600 dark:text-gray-300 px-2 py-0.5 rounded bg-white/40 dark:bg-black/30">
@@ -471,8 +547,15 @@ export function AboutServiceAnimations() {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const cameraScale = useTransform(scrollYProgress, [0, 1], [1, reduce ? 1 : 1.02]);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  const cameraScale = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [1, reduce ? 1 : 1.02],
+  );
   const cameraY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : -10]);
 
   useEffect(() => {
@@ -490,16 +573,19 @@ export function AboutServiceAnimations() {
       mouseX.set(nx);
       mouseY.set(ny);
     },
-    [mouseX, mouseY]
+    [mouseX, mouseY],
   );
 
   const containerVariants = useMemo(
     () => ({ hidden: {}, visible: { transition: { staggerChildren: 0.5 } } }),
-    []
+    [],
   );
   const itemVariants = useMemo(
-    () => ({ hidden: { opacity: 0, y: 18 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } }),
-    []
+    () => ({
+      hidden: { opacity: 0, y: 18 },
+      visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+    }),
+    [],
   );
 
   return (
