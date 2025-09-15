@@ -1,0 +1,125 @@
+
+/** @import must precede all other statements */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /**
+   * Tailwind CSS theme
+   * tailwind.config.ts expects the following color variables to be expressed as HSL values.
+   * A different format will require also updating the theme in tailwind.config.ts.
+  */
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 230 35% 7%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 230 35% 7%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 230 35% 7%;
+
+    --primary: 270 100% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 275 100% 96%;
+    --secondary-foreground: 270 60% 22%;
+
+    --muted: 255 28% 95%;
+    --muted-foreground: 248 15% 40%;
+
+    --accent: 196 100% 48%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 270 32% 88%;
+    --input: 270 32% 88%;
+    --ring: 270 95% 56%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 258 90% 60%;
+
+    --sidebar-primary-foreground: 0 0% 100%;
+
+    --sidebar-accent: 260 100% 96%;
+
+    --sidebar-accent-foreground: 258 60% 25%;
+
+    --sidebar-border: 258 30% 90%;
+
+    --sidebar-ring: 258 85% 55%;
+  }
+
+  .dark {
+    --background: 240 22% 8%;
+    --foreground: 210 40% 98%;
+
+    --card: 240 22% 10%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 240 22% 10%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 270 100% 65%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 245 16% 18%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 245 16% 18%;
+    --muted-foreground: 216 13% 75%;
+
+    --accent: 196 100% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 240 14% 20%;
+    --input: 240 14% 20%;
+    --ring: 270 95% 62%;
+    --sidebar-background: 240 20% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 258 90% 66%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 16% 18%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 14% 20%;
+    --sidebar-ring: 258 85% 62%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-gradient {
+  animation: gradient-shift 6s ease infinite;
+  background-size: 400% 400%;
+}
