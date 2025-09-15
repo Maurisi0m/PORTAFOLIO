@@ -5,39 +5,6 @@ function clamp(n: number, min: number, max: number) {
   return Math.max(min, Math.min(max, n));
 }
 
-function ParallaxBackground({ mouseX, mouseY, reduce }: { mouseX: any; mouseY: any; reduce: boolean }) {
-  const x1 = useTransform(mouseX, [-1, 1], [-40, 40]);
-  const y1 = useTransform(mouseY, [-1, 1], [-40, 40]);
-  const x2 = useTransform(mouseX, [-1, 1], [24, -24]);
-  const y2 = useTransform(mouseY, [-1, 1], [24, -24]);
-  const x3 = useTransform(mouseX, [-1, 1], [-14, 14]);
-  const y3 = useTransform(mouseY, [-1, 1], [14, -14]);
-
-  const float = reduce
-    ? {}
-    : { y: [0, -10, 0], transition: { duration: 7, repeat: Infinity, ease: "easeInOut" } };
-
-  return (
-    <div aria-hidden className="absolute inset-0 -z-10 overflow-hidden">
-      <motion.div
-        className="absolute -top-40 -left-40 h-[50rem] w-[50rem] rounded-full blur-3xl bg-[radial-gradient(closest-side,theme(colors.violet.500/.28),transparent)]"
-        style={{ x: x1, y: y1 }}
-        animate={float as any}
-      />
-      <motion.div
-        className="absolute -bottom-40 -right-40 h-[48rem] w-[48rem] rounded-full blur-3xl bg-[radial-gradient(closest-side,theme(colors.fuchsia.500/.22),transparent)]"
-        style={{ x: x2, y: y2 }}
-        animate={float as any}
-      />
-      <motion.div
-        className="absolute top-1/3 left-1/2 -translate-x-1/2 h-[40rem] w-[40rem] rounded-full blur-3xl bg-[radial-gradient(closest-side,theme(colors.blue.500/.16),transparent)]"
-        style={{ x: x3, y: y3 }}
-        animate={float as any}
-      />
-    </div>
-  );
-}
-
 function TypeLine({
   text,
   startDelay = 0,
@@ -297,8 +264,7 @@ function HostingScene() {
       transition={{ duration: 0.55 }}
       className="w-full grid place-items-center"
     >
-      <div className="w-full max-w-5xl h-80 md:h-[22rem] lg:h-[30rem] rounded-2xl relative flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20" />
+      <div className="w-full max-w-5xl h-80 md:h-[22rem] lg:h-[30rem] relative flex items-center justify-center overflow-visible">
         <div className="relative z-10 flex gap-10 md:gap-12 items-end">
           {[...Array(3)].map((_, i) => (
             <motion.div
@@ -393,8 +359,8 @@ export function AboutServiceAnimations() {
   const mouseY = useMotionValue(0);
 
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const cameraScale = useTransform(scrollYProgress, [0, 1], [1, reduce ? 1 : 1.04]);
-  const cameraY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : -16]);
+  const cameraScale = useTransform(scrollYProgress, [0, 1], [1, reduce ? 1 : 1.02]);
+  const cameraY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : -10]);
 
   useEffect(() => {
     if (inView) controls.start("visible");
@@ -426,14 +392,14 @@ export function AboutServiceAnimations() {
   return (
     <motion.div
       ref={ref}
-      className="relative min-h-[120vh] flex flex-col justify-center items-center gap-14"
+      className="relative flex flex-col justify-center items-center gap-14"
       variants={containerVariants}
       initial="hidden"
       animate={controls}
       onMouseMove={onMouseMove}
       style={{ scale: cameraScale, y: cameraY }}
     >
-      <ParallaxBackground mouseX={mouseX} mouseY={mouseY} reduce={reduce} />
+      {/* No decorative section backgrounds to blend with page theme */}
 
       <div className="w-full max-w-5xl grid gap-16">
         <motion.div variants={itemVariants}>
