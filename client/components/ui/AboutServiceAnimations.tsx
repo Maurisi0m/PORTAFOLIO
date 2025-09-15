@@ -125,6 +125,31 @@ function PhoneChatScene() {
   );
 }
 
+type CodeToken = { t: string; c?: string };
+function CodeLine({ parts, delay = 0 }: { parts: CodeToken[]; delay?: number }) {
+  return (
+    <pre className="font-mono text-[13px] md:text-sm leading-7 whitespace-pre-wrap">
+      {parts.map((p, i) => (
+        <motion.span
+          key={i}
+          className={p.c}
+          initial={{ opacity: 0, y: 2 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.18, delay: delay + i * 0.04 }}
+        >
+          {p.t}
+        </motion.span>
+      ))}
+      <motion.span
+        className="inline-block w-0.5 h-4 align-[-2px] bg-white/70 ml-0.5"
+        animate={{ opacity: [1, 0] }}
+        transition={{ duration: 0.9, repeat: Infinity }}
+      />
+    </pre>
+  );
+}
+
 function MonitorCodeScene() {
   return (
     <motion.section
@@ -134,64 +159,132 @@ function MonitorCodeScene() {
       transition={{ duration: 0.5 }}
       className="w-full grid place-items-center"
     >
-      <div className="w-full max-w-3xl">
-        <div className="h-12 bg-gray-900 rounded-t-2xl flex items-center gap-2 px-4">
-          <span className="w-2.5 h-2.5 rounded-full bg-red-500" />
-          <span className="w-2.5 h-2.5 rounded-full bg-yellow-500" />
-          <span className="w-2.5 h-2.5 rounded-full bg-green-500" />
-          <span className="ml-3 text-xs text-white/60">Editor — diseño y revisión</span>
-        </div>
-        <div className="bg-black rounded-b-2xl h-72 md:h-80 lg:h-96 relative overflow-hidden">
-          <div className="absolute inset-y-0 left-0 w-10 bg-gray-900/70 text-gray-500 text-xs font-mono grid content-start pt-4 px-2">
-            {Array.from({ length: 18 }).map((_, i) => (
-              <span key={i} className="leading-6">
-                {i + 1}
-              </span>
-            ))}
+      <div className="w-full max-w-4xl">
+        {/* Monitor body */}
+        <div className="relative rounded-[1.5rem] bg-gradient-to-b from-neutral-900 to-neutral-950 border border-neutral-800 shadow-[0_40px_120px_-30px_rgba(0,0,0,0.6)]">
+          {/* Top bar with camera and power led */}
+          <div className="h-10 px-4 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+              <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
+              <span className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
+            </div>
+            <div className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(16,185,129,0.9)]" />
           </div>
-          <div className="pl-12 pr-4 pt-6">
-            <TypeLine
-              text="const design = await createWebsite();"
-              startDelay={200}
-              speed={22}
-              className="text-emerald-400 font-mono text-sm md:text-base leading-7"
-            />
-            <TypeLine
-              text="function optimizePerformance() {"
-              startDelay={1100}
-              speed={22}
-              className="text-emerald-400 font-mono text-sm md:text-base leading-7"
-            />
-            <TypeLine
-              text="  return responsive && fast;"
-              startDelay={2000}
-              speed={22}
-              className="text-emerald-400 font-mono text-sm md:text-base leading-7"
-            />
-            <TypeLine
-              text="}"
-              startDelay={2700}
-              speed={22}
-              className="text-emerald-400 font-mono text-sm md:text-base leading-7"
-            />
+
+          {/* Screen */}
+          <div className="relative mx-4 mb-4 rounded-xl overflow-hidden bg-black ring-1 ring-neutral-800">
+            {/* Tabs */}
+            <div className="h-9 flex items-center gap-2 px-3 bg-neutral-900/80 border-b border-neutral-800">
+              <div className="px-2.5 py-1 text-xs rounded bg-neutral-800 text-neutral-200">App.tsx</div>
+              <div className="px-2.5 py-1 text-xs rounded text-neutral-400">styles.css</div>
+              <div className="px-2.5 py-1 text-xs rounded text-neutral-400">README.md</div>
+              <div className="ml-auto text-[10px] text-neutral-500">UTF-8 • LF • React • TypeScript</div>
+            </div>
+
+            {/* Code area */}
+            <div className="relative p-4 md:p-6">
+              {/* Scanlines */}
+              <div className="pointer-events-none absolute inset-0 opacity-[0.08] mix-blend-soft-light" style={{ backgroundImage: "repeating-linear-gradient(0deg, rgba(255,255,255,0.05) 0, rgba(255,255,255,0.05) 1px, transparent 1px, transparent 3px)" }} />
+              {/* Glow */}
+              <div className="pointer-events-none absolute -inset-10 bg-[radial-gradient(600px_circle_at_20%_10%,rgba(255,255,255,0.05),transparent_40%)]" />
+
+              <div className="pl-8">
+                {/* Line numbers */}
+                <div className="absolute left-0 top-0 bottom-0 w-8 bg-neutral-950/70 text-neutral-600 text-[11px] font-mono grid content-start pt-6 px-2">
+                  {Array.from({ length: 18 }).map((_, i) => (
+                    <span key={i} className="leading-7">{i + 1}</span>
+                  ))}
+                </div>
+
+                {/* Code lines with token typing */}
+                <CodeLine
+                  delay={0.1}
+                  parts={[
+                    { t: "import ", c: "text-sky-400" },
+                    { t: "React", c: "text-emerald-300" },
+                    { t: ", { ", c: "text-neutral-300" },
+                    { t: "useState", c: "text-purple-400" },
+                    { t: ", ", c: "text-neutral-300" },
+                    { t: "useEffect", c: "text-purple-400" },
+                    { t: " } from ", c: "text-neutral-300" },
+                    { t: '"react"', c: "text-amber-300" },
+                    { t: ";", c: "text-neutral-500" },
+                  ]}
+                />
+                <CodeLine
+                  delay={0.35}
+                  parts={[
+                    { t: "const ", c: "text-sky-400" },
+                    { t: "App", c: "text-emerald-300" },
+                    { t: " = () => ", c: "text-neutral-300" },
+                    { t: "{", c: "text-neutral-500" },
+                  ]}
+                />
+                <CodeLine
+                  delay={0.6}
+                  parts={[
+                    { t: "  const ", c: "text-sky-400" },
+                    { t: "[ready, setReady]", c: "text-emerald-300" },
+                    { t: " = ", c: "text-neutral-300" },
+                    { t: "useState", c: "text-purple-400" },
+                    { t: "(", c: "text-neutral-500" },
+                    { t: "false", c: "text-amber-300" },
+                    { t: ")", c: "text-neutral-500" },
+                    { t: ";", c: "text-neutral-500" },
+                  ]}
+                />
+                <CodeLine
+                  delay={0.9}
+                  parts={[
+                    { t: "  useEffect", c: "text-purple-400" },
+                    { t: "(() => ", c: "text-neutral-300" },
+                    { t: "{", c: "text-neutral-500" },
+                    { t: " const ", c: "text-sky-400" },
+                    { t: "t", c: "text-emerald-300" },
+                    { t: " = setTimeout(() => setReady(true), ", c: "text-neutral-300" },
+                    { t: "600", c: "text-amber-300" },
+                    { t: "); return () => clearTimeout(t); }", c: "text-neutral-300" },
+                    { t: ", []);", c: "text-neutral-500" },
+                  ]}
+                />
+                <CodeLine
+                  delay={1.25}
+                  parts={[
+                    { t: "  return ", c: "text-sky-400" },
+                    { t: "(", c: "text-neutral-500" },
+                    { t: "<", c: "text-blue-400" },
+                    { t: "div", c: "text-blue-400" },
+                    { t: " ", c: "" },
+                    { t: "className", c: "text-fuchsia-400" },
+                    { t: "=", c: "text-neutral-300" },
+                    { t: '"hero"', c: "text-amber-300" },
+                    { t: ">Hola ", c: "text-neutral-100" },
+                    { t: "👋", c: "" },
+                    { t: "</", c: "text-blue-400" },
+                    { t: "div", c: "text-blue-400" },
+                    { t: ">)", c: "text-neutral-500" },
+                  ]}
+                />
+                <CodeLine delay={1.55} parts={[{ t: "}", c: "text-neutral-500" }]} />
+                <CodeLine
+                  delay={1.75}
+                  parts={[
+                    { t: "export default ", c: "text-sky-400" },
+                    { t: "App", c: "text-emerald-300" },
+                    { t: ";", c: "text-neutral-500" },
+                  ]}
+                />
+              </div>
+
+              {/* Minimap */}
+              <div className="absolute right-2 top-12 bottom-2 w-1.5 rounded bg-gradient-to-b from-emerald-500/40 via-emerald-400/30 to-emerald-500/20" />
+            </div>
           </div>
-          <motion.div className="absolute bottom-4 left-12 right-6 h-3 rounded bg-emerald-600/30">
-            <motion.div
-              className="h-3 rounded bg-emerald-500"
-              animate={{ width: ["10%", "94%", "62%", "100%"] }}
-              transition={{ duration: 6, repeat: Infinity }}
-            />
-          </motion.div>
-          <motion.div
-            className="absolute top-4 right-4 text-emerald-400 text-xs"
-            animate={{ opacity: [0.4, 1, 0.4] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            Lighthouse 95+
-          </motion.div>
         </div>
-        <div className="w-28 h-6 bg-gray-700 mx-auto rounded-b-md mt-2" />
-        <div className="w-16 h-4 bg-gray-800 mx-auto rounded-b-md" />
+        {/* Stand */}
+        <div className="w-28 h-6 bg-neutral-800 mx-auto rounded-b-md mt-2" />
+        <div className="w-16 h-4 bg-neutral-900 mx-auto rounded-b-md" />
       </div>
       <p className="mt-6 text-center font-bold text-gray-900 dark:text-gray-100 text-xl">
         Diseñamos y revisamos
@@ -399,8 +492,6 @@ export function AboutServiceAnimations() {
       onMouseMove={onMouseMove}
       style={{ scale: cameraScale, y: cameraY }}
     >
-      {/* No decorative section backgrounds to blend with page theme */}
-
       <div className="w-full max-w-5xl grid gap-16">
         <motion.div variants={itemVariants}>
           <PhoneChatScene />
