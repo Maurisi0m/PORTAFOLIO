@@ -126,7 +126,13 @@ function TypeLine({ text, startDelay = 0, speed = 30, loop = true, className = "
 function PhoneChatScene() {
   return (
     <TiltCard>
-      <div className="flex justify-center">
+      <motion.div
+        initial={{ opacity: 0, y: 20, scale: 0.98 }}
+        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.5 }}
+        className="flex justify-center"
+      >
         <div className="relative w-[220px] sm:w-[260px] md:w-[300px] lg:w-[340px] aspect-[9/19] rounded-[3rem] bg-neutral-900 shadow-2xl">
           <div className="absolute inset-[8px] rounded-[2.6rem] bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900 dark:to-blue-800 overflow-hidden">
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-6 bg-black/80 rounded-b-2xl" />
@@ -140,26 +146,21 @@ function PhoneChatScene() {
             </div>
             <div className="absolute inset-0 pt-8 px-3">
               <div className="space-y-3">
-                <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }} className="max-w-[78%] rounded-2xl rounded-tl-sm bg-white text-gray-900 px-3 py-2 shadow">
+                <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.45, delay: 0.15 }} className="max-w-[78%] rounded-2xl rounded-tl-sm bg-white text-gray-900 px-3 py-2 shadow">
                   Hola, ¿cómo podemos ayudarte hoy?
                 </motion.div>
-                <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, delay: 0.4 }} className="ml-auto max-w-[78%] rounded-2xl rounded-tr-sm bg-blue-500 text-white px-3 py-2 shadow">
+                <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.45, delay: 0.45 }} className="ml-auto max-w-[78%] rounded-2xl rounded-tr-sm bg-blue-500 text-white px-3 py-2 shadow">
                   Queremos diseñar tu sitio web.
                 </motion.div>
-                <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, delay: 0.8 }} className="max-w-[78%] rounded-2xl rounded-tl-sm bg-white text-gray-900 px-3 py-2 shadow">
+                <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.45, delay: 0.8 }} className="max-w-[78%] rounded-2xl rounded-tl-sm bg-white text-gray-900 px-3 py-2 shadow">
                   ¡Perfecto! Cuéntanos más sobre tu idea.
-                </motion.div>
-                <motion.div className="flex items-center gap-1 pl-2 text-gray-600" animate={{ opacity: [0.2, 1, 0.2] }} transition={{ duration: 1.8, repeat: Infinity, delay: 1.2 }}>
-                  <span className="w-1.5 h-1.5 rounded-full bg-gray-600" />
-                  <span className="w-1.5 h-1.5 rounded-full bg-gray-600" />
-                  <span className="w-1.5 h-1.5 rounded-full bg-gray-600" />
                 </motion.div>
               </div>
             </div>
           </div>
-          <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-28 h-1.5 bg-black/40 rounded-full blur-sm" />
+          <motion.div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-28 h-1.5 bg-black/40 rounded-full blur-sm" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} />
         </div>
-      </div>
+      </motion.div>
       <p className="mt-6 text-center font-bold text-gray-900 dark:text-gray-100 text-xl">Planeamos tu proyecto</p>
     </TiltCard>
   );
@@ -168,7 +169,7 @@ function PhoneChatScene() {
 function MonitorCodeScene() {
   return (
     <TiltCard>
-      <div className="relative flex flex-col items-center">
+      <motion.div initial={{ opacity: 0, y: 24, scale: 0.98 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} viewport={{ once: true, margin: "-100px" }} transition={{ duration: 0.5 }} className="relative flex flex-col items-center">
         <div className="w-full max-w-3xl">
           <div className="h-12 bg-gray-900 rounded-t-2xl flex items-center gap-2 px-4">
             <span className="w-2.5 h-2.5 rounded-full bg-red-500" />
@@ -196,7 +197,7 @@ function MonitorCodeScene() {
           <div className="w-28 h-6 bg-gray-700 mx-auto rounded-b-md mt-2" />
           <div className="w-16 h-4 bg-gray-800 mx-auto rounded-b-md" />
         </div>
-      </div>
+      </motion.div>
       <p className="mt-6 text-center font-bold text-gray-900 dark:text-gray-100 text-xl">Diseñamos y revisamos</p>
     </TiltCard>
   );
@@ -248,7 +249,7 @@ function BeamsOverlay() {
 function HostingScene() {
   return (
     <TiltCard>
-      <div className="w-full h-72 md:h-80 lg:h-[28rem] rounded-2xl relative flex items-center justify-center overflow-hidden">
+      <motion.div initial={{ opacity: 0, y: 28, scale: 0.98 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} viewport={{ once: true, margin: "-100px" }} transition={{ duration: 0.55 }} className="w-full h-80 md:h-[22rem] lg:h-[30rem] rounded-2xl relative flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20" />
         <div className="relative z-10 flex gap-10 md:gap-12 items-end">
           {[...Array(3)].map((_, i) => (
@@ -256,11 +257,11 @@ function HostingScene() {
               key={i}
               animate={{ rotateY: [0, 12, 0], scale: [1, 1.05, 1] }}
               transition={{ duration: 3, repeat: Infinity, delay: i * 0.5 }}
-              className="w-24 md:w-28 lg:w-32 h-40 md:h-48 lg:h-56 bg-gray-300 dark:bg-gray-700 rounded-xl shadow-inner relative transform-gpu"
+              className="w-24 md:w-28 lg:w-36 h-44 md:h-56 lg:h-64 bg-gray-300 dark:bg-gray-700 rounded-xl shadow-inner relative transform-gpu"
               style={{ transformStyle: "preserve-3d" }}
             >
               {[0,1,2,3,4].map((r) => (
-                <motion.div key={r} className="absolute left-4 right-4 h-4 bg-gray-400/80 dark:bg-gray-600/80 rounded" style={{ top: 14 + r * 24 }} animate={{ opacity: [0.5, 1, 0.5] }} transition={{ duration: 1, repeat: Infinity, delay: i * 0.2 + r * 0.2 }} />
+                <motion.div key={r} className="absolute left-4 right-4 h-4 bg-gray-400/80 dark:bg-gray-600/80 rounded" style={{ top: 14 + r * 26 }} animate={{ opacity: [0.5, 1, 0.5] }} transition={{ duration: 1, repeat: Infinity, delay: i * 0.2 + r * 0.2 }} />
               ))}
               <motion.div className="absolute -top-3 left-1/2 -translate-x-1/2 text-[10px] font-bold text-gray-600 dark:text-gray-300 px-2 py-0.5 rounded bg-white/40 dark:bg-black/30">EDGE</motion.div>
               <motion.div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-[11px] font-bold text-gray-700 dark:text-gray-200" animate={{ opacity: [0.7, 1, 0.7] }} transition={{ duration: 2, repeat: Infinity }}>WWW</motion.div>
@@ -272,12 +273,12 @@ function HostingScene() {
         <motion.div
           animate={{ scale: [1, 1.2, 1], rotate: [0, 12, 0] }}
           transition={{ duration: 3, repeat: Infinity }}
-          className="absolute top-6 right-8 w-40 h-28 bg-gray-300/80 dark:bg-gray-600/70 rounded-full"
+          className="absolute top-6 right-8 w-44 h-28 bg-gray-300/80 dark:bg-gray-600/70 rounded-full"
         >
-          <div className="absolute top-6 left-6 w-28 h-16 bg-gray-200/80 dark:bg-gray-700/80 rounded-full" />
-          <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-6 h-6 bg-primary rounded-full grid place-items-center text-white text-sm shadow">✓</div>
+          <div className="absolute top-6 left-6 w-32 h-16 bg-gray-200/80 dark:bg-gray-700/80 rounded-full" />
+          <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-7 h-7 bg-primary rounded-full grid place-items-center text-white text-sm shadow">✓</div>
         </motion.div>
-      </div>
+      </motion.div>
       <p className="mt-6 text-center font-bold text-gray-900 dark:text-gray-100 text-xl">Hosting y despliegue</p>
     </TiltCard>
   );
@@ -291,21 +292,8 @@ function ProcessTimeline() {
     { title: "Despliegue", desc: "Hosting global y monitoreo." },
   ];
   return (
-    <div className="mt-24 w-full">
-      <div className="hidden md:grid grid-cols-4 gap-8">
-        {steps.map((s, i) => (
-          <motion.div key={s.title} initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.28, delay: i * 0.08 }} className="relative">
-            <div className="h-3 rounded bg-muted overflow-hidden">
-              <motion.div className="h-3 bg-primary" initial={{ width: 0 }} whileInView={{ width: "100%" }} viewport={{ once: true }} transition={{ duration: 1.2, delay: i * 0.15 }} />
-            </div>
-            <div className="mt-4">
-              <div className="text-sm font-semibold">{s.title}</div>
-              <div className="text-xs text-muted-foreground">{s.desc}</div>
-            </div>
-          </motion.div>
-        ))}
-      </div>
-      <div className="md:hidden space-y-5">
+    <div className="mt-16 w-full">
+      <div className="space-y-5">
         {steps.map((s, i) => (
           <motion.div key={s.title} initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.25, delay: i * 0.08 }} className="flex items-start gap-3">
             <span className="mt-1 h-2.5 w-2.5 rounded-full bg-primary" />
@@ -330,8 +318,8 @@ export function AboutServiceAnimations() {
   const mouseY = useMotionValue(0);
 
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const cameraScale = useTransform(scrollYProgress, [0, 1], [1, reduce ? 1 : 1.06]);
-  const cameraY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : -30]);
+  const cameraScale = useTransform(scrollYProgress, [0, 1], [1, reduce ? 1 : 1.04]);
+  const cameraY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : -16]);
 
   useEffect(() => { if (inView) controls.start("visible"); }, [inView, controls]);
 
@@ -348,13 +336,13 @@ export function AboutServiceAnimations() {
     (currentTarget as HTMLDivElement).style.setProperty("--y", `${((ny + 1) / 2) * 100}%`);
   }, [mouseX, mouseY]);
 
-  const containerVariants = useMemo(() => ({ hidden: {}, visible: { transition: { staggerChildren: 0.45 } } }), []);
-  const itemVariants = useMemo(() => ({ hidden: { opacity: 0, y: 18 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }), []);
+  const containerVariants = useMemo(() => ({ hidden: {}, visible: { transition: { staggerChildren: 0.5 } } }), []);
+  const itemVariants = useMemo(() => ({ hidden: { opacity: 0, y: 18 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } }), []);
 
   return (
     <motion.div
       ref={ref}
-      className="relative min-h-[140vh] flex flex-col justify-center items-center gap-16 md:gap-24"
+      className="relative min-h-[140vh] flex flex-col justify-center items-center gap-14"
       variants={containerVariants}
       initial="hidden"
       animate={controls}
@@ -363,10 +351,11 @@ export function AboutServiceAnimations() {
     >
       <ParallaxBackground mouseX={mouseX} mouseY={mouseY} reduce={reduce} />
 
-      <div className="grid w-full max-w-7xl gap-10 md:gap-12 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+      {/* Stacked vertical order: 1 phone, 2 monitor, 3 hosting */}
+      <div className="grid w-full max-w-3xl gap-12 grid-cols-1">
         <motion.div variants={itemVariants}><PhoneChatScene /></motion.div>
         <motion.div variants={itemVariants}><MonitorCodeScene /></motion.div>
-        <motion.div className="xl:block md:col-span-2 xl:col-span-1" variants={itemVariants}><HostingScene /></motion.div>
+        <motion.div variants={itemVariants}><HostingScene /></motion.div>
       </div>
 
       <ProcessTimeline />
