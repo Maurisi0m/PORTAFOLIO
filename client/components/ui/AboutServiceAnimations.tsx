@@ -97,17 +97,6 @@ function PhoneChatScene() {
               >
                 ¡Perfecto! Cuéntanos más sobre tu idea.
               </motion.div>
-              <motion.div
-                className="flex items-center gap-1 pl-2 text-gray-600"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 1.2, duration: 0.3 }}
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-gray-600" />
-                <span className="w-1.5 h-1.5 rounded-full bg-gray-600" />
-                <span className="w-1.5 h-1.5 rounded-full bg-gray-600" />
-              </motion.div>
             </div>
           </div>
         </div>
@@ -126,26 +115,51 @@ function PhoneChatScene() {
 }
 
 type CodeToken = { t: string; c?: string };
-function CodeLine({ parts, delay = 0 }: { parts: CodeToken[]; delay?: number }) {
+function TokenTypeLine({ tokens, startDelay = 0, speed = 24, loop = false }: { tokens: CodeToken[]; startDelay?: number; speed?: number; loop?: boolean }) {
+  const totalLen = useMemo(() => tokens.reduce((acc, tk) => acc + tk.t.length, 0), [tokens]);
+  const [started, setStarted] = useState(false);
+  const [pos, setPos] = useState(0);
+  const offsets = useMemo(() => {
+    const out: number[] = [];
+    let acc = 0;
+    for (const tk of tokens) {
+      out.push(acc);
+      acc += tk.t.length;
+    }
+    return out;
+  }, [tokens]);
+
+  useEffect(() => {
+    const t = setTimeout(() => setStarted(true), startDelay);
+    return () => clearTimeout(t);
+  }, [startDelay]);
+
+  useEffect(() => {
+    if (!started) return;
+    if (pos <= totalLen) {
+      const id = setTimeout(() => setPos((v) => v + 1), speed);
+      return () => clearTimeout(id);
+    }
+    if (loop) {
+      const id = setTimeout(() => setPos(0), 800);
+      return () => clearTimeout(id);
+    }
+  }, [pos, started, totalLen, speed, loop]);
+
   return (
     <pre className="font-mono text-[13px] md:text-sm leading-7 whitespace-pre-wrap">
-      {parts.map((p, i) => (
-        <motion.span
-          key={i}
-          className={p.c}
-          initial={{ opacity: 0, y: 2 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.18, delay: delay + i * 0.04 }}
-        >
-          {p.t}
-        </motion.span>
-      ))}
-      <motion.span
-        className="inline-block w-0.5 h-4 align-[-2px] bg-white/70 ml-0.5"
-        animate={{ opacity: [1, 0] }}
-        transition={{ duration: 0.9, repeat: Infinity }}
-      />
+      {tokens.map((tk, i) => {
+        const start = offsets[i];
+        const end = start + tk.t.length;
+        const show = clamp(pos - start, 0, tk.t.length);
+        const content = tk.t.slice(0, show);
+        return (
+          <span key={i} className={tk.c}>{content}</span>
+        );
+      })}
+      {pos <= totalLen && (
+        <motion.span className="inline-block w-0.5 h-4 align-[-2px] bg-white/80 ml-0.5" animate={{ opacity: [1, 0] }} transition={{ duration: 0.7, repeat: Infinity }} />
+      )}
     </pre>
   );
 }
@@ -159,11 +173,11 @@ function MonitorCodeScene() {
       transition={{ duration: 0.5 }}
       className="w-full grid place-items-center"
     >
-      <div className="w-full max-w-4xl">
+      <div className="w-full max-w-5xl">
         {/* Monitor body */}
-        <div className="relative rounded-[1.5rem] bg-gradient-to-b from-neutral-900 to-neutral-950 border border-neutral-800 shadow-[0_40px_120px_-30px_rgba(0,0,0,0.6)]">
+        <div className="relative rounded-[1.5rem] bg-gradient-to-b from-neutral-900 to-neutral-950 border border-neutral-800 shadow-[0_50px_140px_-30px_rgba(0,0,0,0.6)]">
           {/* Top bar with camera and power led */}
-          <div className="h-10 px-4 flex items-center justify-between">
+          <div className="h-12 px-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
               <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
@@ -172,8 +186,8 @@ function MonitorCodeScene() {
             <div className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(16,185,129,0.9)]" />
           </div>
 
-          {/* Screen */}
-          <div className="relative mx-4 mb-4 rounded-xl overflow-hidden bg-black ring-1 ring-neutral-800">
+          {/* Screen taller */}
+          <div className="relative mx-4 mb-4 rounded-xl overflow-hidden bg-black ring-1 ring-neutral-800 h-[28rem] md:h-[32rem] lg:h-[36rem]">
             {/* Tabs */}
             <div className="h-9 flex items-center gap-2 px-3 bg-neutral-900/80 border-b border-neutral-800">
               <div className="px-2.5 py-1 text-xs rounded bg-neutral-800 text-neutral-200">App.tsx</div>
@@ -183,24 +197,25 @@ function MonitorCodeScene() {
             </div>
 
             {/* Code area */}
-            <div className="relative p-4 md:p-6">
+            <div className="relative p-4 md:p-6 h-[calc(100%-2.25rem)] overflow-hidden">
               {/* Scanlines */}
               <div className="pointer-events-none absolute inset-0 opacity-[0.08] mix-blend-soft-light" style={{ backgroundImage: "repeating-linear-gradient(0deg, rgba(255,255,255,0.05) 0, rgba(255,255,255,0.05) 1px, transparent 1px, transparent 3px)" }} />
               {/* Glow */}
-              <div className="pointer-events-none absolute -inset-10 bg-[radial-gradient(600px_circle_at_20%_10%,rgba(255,255,255,0.05),transparent_40%)]" />
+              <div className="pointer-events-none absolute -inset-10 bg-[radial-gradient(700px_circle_at_20%_10%,rgba(255,255,255,0.05),transparent_40%)]" />
 
-              <div className="pl-8">
-                {/* Line numbers */}
-                <div className="absolute left-0 top-0 bottom-0 w-8 bg-neutral-950/70 text-neutral-600 text-[11px] font-mono grid content-start pt-6 px-2">
-                  {Array.from({ length: 18 }).map((_, i) => (
-                    <span key={i} className="leading-7">{i + 1}</span>
-                  ))}
-                </div>
+              {/* Line numbers */}
+              <div className="absolute left-0 top-9 bottom-0 w-8 bg-neutral-950/70 text-neutral-600 text-[11px] font-mono grid content-start pt-6 px-2">
+                {Array.from({ length: 26 }).map((_, i) => (
+                  <span key={i} className="leading-7">{i + 1}</span>
+                ))}
+              </div>
 
-                {/* Code lines with token typing */}
-                <CodeLine
-                  delay={0.1}
-                  parts={[
+              {/* Code lines with true typing across tokens */}
+              <div className="pl-8 mt-2">
+                <TokenTypeLine
+                  startDelay={200}
+                  speed={18}
+                  tokens={[
                     { t: "import ", c: "text-sky-400" },
                     { t: "React", c: "text-emerald-300" },
                     { t: ", { ", c: "text-neutral-300" },
@@ -212,18 +227,20 @@ function MonitorCodeScene() {
                     { t: ";", c: "text-neutral-500" },
                   ]}
                 />
-                <CodeLine
-                  delay={0.35}
-                  parts={[
+                <TokenTypeLine
+                  startDelay={900}
+                  speed={18}
+                  tokens={[
                     { t: "const ", c: "text-sky-400" },
                     { t: "App", c: "text-emerald-300" },
                     { t: " = () => ", c: "text-neutral-300" },
                     { t: "{", c: "text-neutral-500" },
                   ]}
                 />
-                <CodeLine
-                  delay={0.6}
-                  parts={[
+                <TokenTypeLine
+                  startDelay={1300}
+                  speed={18}
+                  tokens={[
                     { t: "  const ", c: "text-sky-400" },
                     { t: "[ready, setReady]", c: "text-emerald-300" },
                     { t: " = ", c: "text-neutral-300" },
@@ -234,9 +251,10 @@ function MonitorCodeScene() {
                     { t: ";", c: "text-neutral-500" },
                   ]}
                 />
-                <CodeLine
-                  delay={0.9}
-                  parts={[
+                <TokenTypeLine
+                  startDelay={1750}
+                  speed={18}
+                  tokens={[
                     { t: "  useEffect", c: "text-purple-400" },
                     { t: "(() => ", c: "text-neutral-300" },
                     { t: "{", c: "text-neutral-500" },
@@ -248,9 +266,10 @@ function MonitorCodeScene() {
                     { t: ", []);", c: "text-neutral-500" },
                   ]}
                 />
-                <CodeLine
-                  delay={1.25}
-                  parts={[
+                <TokenTypeLine
+                  startDelay={2450}
+                  speed={18}
+                  tokens={[
                     { t: "  return ", c: "text-sky-400" },
                     { t: "(", c: "text-neutral-500" },
                     { t: "<", c: "text-blue-400" },
@@ -266,10 +285,11 @@ function MonitorCodeScene() {
                     { t: ">)", c: "text-neutral-500" },
                   ]}
                 />
-                <CodeLine delay={1.55} parts={[{ t: "}", c: "text-neutral-500" }]} />
-                <CodeLine
-                  delay={1.75}
-                  parts={[
+                <TokenTypeLine startDelay={3150} speed={18} tokens={[{ t: "}", c: "text-neutral-500" }]} />
+                <TokenTypeLine
+                  startDelay={3400}
+                  speed={18}
+                  tokens={[
                     { t: "export default ", c: "text-sky-400" },
                     { t: "App", c: "text-emerald-300" },
                     { t: ";", c: "text-neutral-500" },
