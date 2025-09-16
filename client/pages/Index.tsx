@@ -75,7 +75,7 @@ export default function Index() {
             transition={{ type: "spring", stiffness: 120, damping: 20 }}
           />
           <div className="md:col-span-7 mx-auto md:mx-0 max-w-[680px]">
-            <span className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs md:text-sm text-muted-foreground bg-background/60 backdrop-blur">
+            <span className="inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-sm md:text-base text-muted-foreground bg-background/60 backdrop-blur">
               <Sparkles className="h-3.5 w-3.5 text-primary" /> Experiencias web inmersivas
             </span>
             <h1 className="mt-5 text-5xl sm:text-7xl md:text-8xl font-extrabold tracking-tight leading-[1.02] text-balance">
@@ -141,22 +141,22 @@ export default function Index() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.25, ease: "easeOut" }}
         >
-          <div className="relative overflow-hidden rounded-2xl border bg-background/50 p-6 md:p-10">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-b from-background/20 to-background/0 p-8 md:p-14">
             <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[radial-gradient(closest-side,theme(colors.primary/15),transparent)] blur-3xl" />
             <div className="relative grid gap-8 md:grid-cols-12 md:items-center">
               <div className={i % 2 === 0 ? "md:col-span-6" : "md:col-span-6 md:order-2"}>
-                <div className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs md:text-sm text-muted-foreground bg-background/60 backdrop-blur">
+                <div className="inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-sm md:text-base text-muted-foreground bg-background/60 backdrop-blur">
                   <span className="text-primary">{s.icon}</span> {s.kicker}
                 </div>
-                <h3 className="mt-4 text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
+                <h3 className="mt-6 text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight">
                   {s.title}
                 </h3>
-                <p className="mt-3 text-sm sm:text-base md:text-lg text-muted-foreground max-w-prose">
+                <p className="mt-4 text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl">
                   {s.desc}
                 </p>
               </div>
               <div className={i % 2 === 0 ? "md:col-span-6" : "md:col-span-6 md:order-1"}>
-                <div className="relative aspect-[16/9] w-full overflow-hidden rounded-xl border bg-background">
+                <div className="relative aspect-[21/9] w-full overflow-hidden rounded-3xl bg-background shadow-2xl">
                   <img
                     src={s.image}
                     alt={s.title}
@@ -220,7 +220,7 @@ export default function Index() {
           ].map((item, i) => (
             <motion.div
               key={i}
-              className="group relative overflow-hidden rounded-2xl border bg-background/50 p-6 hover:shadow-xl transition-all duration-300"
+              className="group relative overflow-hidden rounded-3xl bg-background/30 p-8 md:p-10 hover:shadow-2xl transition-all duration-300 backdrop-blur"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -229,12 +229,12 @@ export default function Index() {
             >
               <div className="absolute -top-10 right-0 h-40 w-40 rounded-full bg-[radial-gradient(closest-side,theme(colors.primary/10),transparent)] blur-2xl group-hover:bg-[radial-gradient(closest-side,theme(colors.primary/20),transparent)] transition-all" />
               <div className="flex items-center gap-4">
-                <div className="grid h-12 w-12 place-items-center rounded-lg bg-gradient-to-br from-primary/10 to-violet-500/10 text-primary">
+                <div className="grid h-14 w-14 place-items-center rounded-xl bg-gradient-to-br from-primary/10 to-violet-500/10 text-primary">
                   {item.icon}
                 </div>
-                <h3 className="font-semibold text-lg">{item.title}</h3>
+                <h3 className="font-semibold text-2xl md:text-3xl">{item.title}</h3>
               </div>
-              <p className="mt-4 text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+              <p className="mt-5 text-base md:text-lg text-muted-foreground leading-relaxed">{item.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -326,7 +326,7 @@ export default function Index() {
               href={d.url}
               target="_blank"
               rel="noreferrer"
-              className="group relative overflow-hidden rounded-2xl border bg-background/50 p-6 hover:shadow-xl transition-all duration-300"
+              className="group relative overflow-hidden rounded-3xl bg-background/30 p-8 md:p-10 hover:shadow-2xl transition-all duration-300 backdrop-blur"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
