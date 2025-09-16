@@ -1,10 +1,6 @@
-# TODO: Enhance AboutService Cards
-
-## Tasks
-- [x] Update grid layout for larger cards (minmax(300px,1fr))
-- [x] Add mouse reactivity (tilt, scale based on mouse position)
-- [x] Add scroll reactivity (parallax or scale on scroll)
-- [x] Implement leaf-like animations (floating elements, organic movements)
-- [x] Add looped details (continuous icon rotations, pulsing effects)
-- [x] Ensure responsive design
-- [ ] Test animations in browser
+- [ ] Add a "Hecho a tu medida" section after features
+- [ ] Add a portfolio preview section showing demos
+- [ ] Add a stats section with numbers
+- [ ] Integrate Phone3DInteraction in hero
+- [ ] Enhance animations and make sections bigger
+- [ ] Test the page

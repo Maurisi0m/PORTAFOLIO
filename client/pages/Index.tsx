@@ -9,10 +9,18 @@ import {
   Shield,
   Sparkles,
   Zap,
+  Users,
+  Star,
+  TrendingUp,
+  ExternalLink,
+  Layout,
+  Globe,
+  Smartphone,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Typewriter } from "@/components/ui/typewriter";
 import Decorative3D from "@/components/ui/Decorative3D";
+
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useRef, useState } from "react";
@@ -105,6 +113,7 @@ export default function Index() {
               <Rocket className="h-4 w-4" /> Rendimiento
             </div>
           </div>
+
           {/* Section quick nav */}
           <div className="mt-8 mx-auto max-w-3xl overflow-x-auto">
             <div className="flex items-center justify-center gap-2 sm:gap-3 w-max mx-auto">
@@ -115,10 +124,16 @@ export default function Index() {
                 Servicio
               </a>
               <a
-                href="#proceso"
+                href="#personalizado"
                 className="whitespace-nowrap rounded-full border px-3 py-1.5 text-sm hover:bg-accent hover:text-accent-foreground transition"
               >
-                Proceso
+                Personalizado
+              </a>
+              <a
+                href="#portafolio"
+                className="whitespace-nowrap rounded-full border px-3 py-1.5 text-sm hover:bg-accent hover:text-accent-foreground transition"
+              >
+                Portafolio
               </a>
               <a
                 href="#cta"
@@ -173,6 +188,76 @@ export default function Index() {
         ))}
       </motion.section>
 
+      {/* HECHO A TU MEDIDA */}
+      <motion.section
+        id="personalizado"
+        className="scroll-mt-24 mt-16 sm:mt-20 px-4"
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.2, ease: "easeOut" }}
+      >
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-2xl md:text-3xl font-bold">Hecho a tu medida</h2>
+          <p className="mt-2 text-muted-foreground">
+            Cada sitio web se diseña desde cero para reflejar tu marca única, adaptándose a tus necesidades específicas y objetivos de negocio.
+          </p>
+        </div>
+        <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {[
+            {
+              title: "Identidad visual personalizada",
+              desc: "Colores, tipografías y elementos gráficos que representan tu marca de manera auténtica.",
+              icon: <Sparkles className="h-6 w-6" />,
+            },
+            {
+              title: "Funcionalidades específicas",
+              desc: "Integraciones, formularios, e-commerce o cualquier feature que necesites para tu negocio.",
+              icon: <Bolt className="h-6 w-6" />,
+            },
+            {
+              title: "Optimización para conversión",
+              desc: "Diseño UX/UI enfocado en guiar a tus visitantes hacia acciones concretas.",
+              icon: <TrendingUp className="h-6 w-6" />,
+            },
+            {
+              title: "Responsive y accesible",
+              desc: "Experiencia perfecta en todos los dispositivos, con estándares de accesibilidad web.",
+              icon: <MonitorSmartphone className="h-6 w-6" />,
+            },
+            {
+              title: "SEO integrado",
+              desc: "Estructura y código optimizado para que tu sitio aparezca en los primeros resultados de búsqueda.",
+              icon: <Globe className="h-6 w-6" />,
+            },
+            {
+              title: "Mantenimiento incluido",
+              desc: "Actualizaciones, soporte técnico y mejoras continuas para mantener tu sitio al día.",
+              icon: <Shield className="h-6 w-6" />,
+            },
+          ].map((item, i) => (
+            <motion.div
+              key={i}
+              className="group relative overflow-hidden rounded-2xl border bg-background/50 p-6 hover:shadow-xl transition-all duration-300"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              whileHover={{ scale: 1.05 }}
+            >
+              <div className="absolute -top-10 right-0 h-40 w-40 rounded-full bg-[radial-gradient(closest-side,theme(colors.primary/10),transparent)] blur-2xl group-hover:bg-[radial-gradient(closest-side,theme(colors.primary/20),transparent)] transition-all" />
+              <div className="flex items-center gap-4">
+                <div className="grid h-12 w-12 place-items-center rounded-lg bg-gradient-to-br from-primary/10 to-violet-500/10 text-primary">
+                  {item.icon}
+                </div>
+                <h3 className="font-semibold text-lg">{item.title}</h3>
+              </div>
+              <p className="mt-4 text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </motion.section>
+
       {/* PROCESS */}
       <motion.section
         id="proceso"
@@ -211,6 +296,117 @@ export default function Index() {
               <h3 className="mt-2 font-semibold">{s.title}</h3>
               <p className="mt-1 text-sm text-muted-foreground">{s.desc}</p>
             </div>
+          ))}
+        </div>
+      </motion.section>
+
+      {/* PORTAFOLIO PREVIEW */}
+      <motion.section
+        id="portafolio"
+        className="scroll-mt-24 mt-16 sm:mt-20 px-4"
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.2, ease: "easeOut" }}
+      >
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-2xl md:text-3xl font-bold">Portafolio destacado</h2>
+          <p className="mt-2 text-muted-foreground">
+            Algunos ejemplos de proyectos realizados con diferentes estilos y enfoques.
+          </p>
+        </div>
+        <div className="mt-12 grid gap-6 [grid-template-columns:repeat(auto-fit,minmax(320px,1fr))]">
+          {[
+            {
+              title: "Cafetería Moderna",
+              desc: "Sitio web para cafetería con menú interactivo, galería de productos y sistema de pedidos en línea.",
+              url: "https://cafeteriaejemplo.netlify.app",
+              icon: <Layout className="h-5 w-5" />,
+              image: "/cafe.png",
+            },
+            {
+              title: "Hotel Boutique",
+              desc: "Página web de hotel con reservas en línea, galería de habitaciones, servicios y ubicación.",
+              url: "https://hotelejemplo.netlify.app",
+              icon: <Globe className="h-5 w-5" />,
+              image: "/hotel.png",
+            },
+            {
+              title: "Blog de Artículos",
+              desc: "Plataforma de blogging con artículos categorizados, sistema de búsqueda y diseño responsive.",
+              url: "https://articuloweb.netlify.app",
+              icon: <Smartphone className="h-5 w-5" />,
+              image: "/articulo.png",
+            },
+          ].map((d, i) => (
+            <motion.a
+              key={d.title}
+              href={d.url}
+              target="_blank"
+              rel="noreferrer"
+              className="group relative overflow-hidden rounded-2xl border bg-background/50 p-6 hover:shadow-xl transition-all duration-300"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              whileHover={{ scale: 1.02 }}
+            >
+              <div className="absolute -top-10 right-0 h-40 w-40 rounded-full bg-[radial-gradient(closest-side,theme(colors.primary/10),transparent)] blur-2xl group-hover:bg-[radial-gradient(closest-side,theme(colors.primary/20),transparent)] transition-all" />
+              {d.image && (
+                <img
+                  src={d.image}
+                  alt={d.title}
+                  className="mb-4 w-full rounded-lg object-cover transition-transform group-hover:scale-105"
+                  style={{ maxHeight: "180px" }}
+                />
+              )}
+              <div className="flex items-center gap-3">
+                <div className="grid h-10 w-10 place-items-center rounded-lg bg-gradient-to-br from-primary/10 to-violet-500/10 text-primary">
+                  {d.icon}
+                </div>
+                <h3 className="font-semibold">{d.title}</h3>
+              </div>
+              <p className="mt-3 text-sm text-muted-foreground">{d.desc}</p>
+              <span className="mt-4 inline-flex items-center gap-1 text-sm text-primary">
+                Ver demo <ExternalLink className="h-3.5 w-3.5" />
+              </span>
+            </motion.a>
+          ))}
+        </div>
+        <div className="mt-8 text-center">
+          <Button asChild variant="outline">
+            <Link to="/demos">Ver todos los demos</Link>
+          </Button>
+        </div>
+      </motion.section>
+
+      {/* STATS */}
+      <motion.section
+        className="mt-16 sm:mt-20 px-4"
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.2, ease: "easeOut" }}
+      >
+        <div className="grid gap-6 [grid-template-columns:repeat(auto-fit,minmax(150px,1fr))] max-w-4xl mx-auto">
+          {[
+            { number: "50+", label: "Proyectos completados", icon: <Award className="h-6 w-6" /> },
+            { number: "100%", label: "Satisfacción cliente", icon: <Star className="h-6 w-6" /> },
+            { number: "24/7", label: "Soporte disponible", icon: <Shield className="h-6 w-6" /> },
+            { number: "3+", label: "Años de experiencia", icon: <TrendingUp className="h-6 w-6" /> },
+          ].map((stat, i) => (
+            <motion.div
+              key={i}
+              className="text-center p-6 rounded-2xl border bg-background/50"
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+            >
+              <div className="flex justify-center mb-2 text-primary">{stat.icon}</div>
+              <div className="text-2xl md:text-3xl font-bold">{stat.number}</div>
+              <div className="text-sm text-muted-foreground">{stat.label}</div>
+            </motion.div>
           ))}
         </div>
       </motion.section>
