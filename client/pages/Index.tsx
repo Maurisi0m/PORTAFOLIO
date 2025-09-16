@@ -36,18 +36,19 @@ export default function Index() {
     <div className="pb-20">
       {/* HERO */}
       <motion.section
-        className="relative pt-16 md:pt-24"
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.2, ease: "easeOut" }}
+        className="relative pt-24 md:pt-32 px-6 md:px-10"
+        style={{
+          marginLeft: "calc(50% - 50vw)",
+          marginRight: "calc(50% - 50vw)",
+          willChange: "opacity, transform, filter",
+        }}
+        initial={{ opacity: 0, y: 24, scale: 0.98, filter: "blur(8px)" }}
+        animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
       >
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.15)_0%,transparent_60%)]" />
-          <div className="absolute left-1/2 top-0 -translate-x-1/2 h-[36rem] w-[36rem] rounded-full bg-[radial-gradient(closest-side,theme(colors.violet.500/30),transparent)] blur-3xl" />
-        </div>
         <div
           ref={heroRef}
-          className="relative isolate mx-auto px-4 max-w-6xl text-center md:text-left md:grid md:grid-cols-12 md:gap-8 md:items-center"
+          className="relative isolate mx-auto px-6 md:px-10 max-w-7xl text-center md:text-left md:grid md:grid-cols-12 md:gap-10 md:items-center"
           onMouseMove={(e) => {
             const rect = heroRef.current?.getBoundingClientRect();
             if (!rect) return;
@@ -60,7 +61,7 @@ export default function Index() {
           onMouseLeave={() => setCursor((p) => ({ ...p, active: false }))}
         >
           <motion.div
-            className="pointer-events-none absolute -z-10 h-40 w-40 sm:h-64 sm:w-64 -translate-x-1/2 -translate-y-1/2 rounded-full blur-2xl"
+            className="pointer-events-none absolute -z-10 h-40 w-40 sm:h-64 sm:w-64 -translate-x-1/2 -translate-y-1/2 rounded-full blur-2xl drop-shadow-[0_0_80px_hsl(var(--primary)/.35)] shadow-2xl shadow-primary/30"
             style={{
               left: cursor.x,
               top: cursor.y,
@@ -74,30 +75,52 @@ export default function Index() {
             }}
             transition={{ type: "spring", stiffness: 120, damping: 20 }}
           />
-          <div className="md:col-span-7 mx-auto md:mx-0 max-w-[680px]">
-            <span className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs md:text-sm text-muted-foreground bg-background/60 backdrop-blur">
-              <Sparkles className="h-3.5 w-3.5 text-primary" /> Experiencias web inmersivas
+          <div className="relative md:col-span-7 mx-auto md:mx-0 max-w-[900px]">
+            <div className="pointer-events-none absolute -inset-x-10 -top-12 bottom-[-14rem] -z-10 rounded-[48px] bg-[radial-gradient(closest-side,theme(colors.violet.500/40),transparent)] blur-[120px] opacity-90 mix-blend-screen" />
+            <span className="inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-sm md:text-base text-muted-foreground bg-background/60 backdrop-blur">
+              <Sparkles className="h-3.5 w-3.5 text-primary" /> Experiencias web
+              inmersivas
             </span>
-            <h1 className="mt-5 text-5xl sm:text-7xl md:text-8xl font-extrabold tracking-tight leading-[1.02] text-balance">
-              <Typewriter text="Un sitio web hace tus ideas realidad" speed={40} />
+            <h1
+              className="mt-6 text-6xl sm:text-8xl md:text-9xl font-extrabold tracking-tight leading-[1.02] text-balance"
+              style={{
+                textShadow:
+                  "0 8px 30px rgba(124,58,237,.55), 0 0 80px rgba(124,58,237,.45), 0 0 160px rgba(124,58,237,.35)",
+              }}
+            >
+              <Typewriter
+                text="Un sitio web hace tus ideas realidad"
+                speed={40}
+              />
             </h1>
-            <p className="mt-6 text-base sm:text-lg md:text-xl text-muted-foreground">
-              Todo lo que necesitas para impulsar tu negocio: diseño, desarrollo, rendimiento y SEO, en una experiencia moderna y profesional.
+            <p className="mt-6 text-lg sm:text-2xl md:text-3xl text-muted-foreground">
+              Todo lo que necesitas para impulsar tu negocio: diseño,
+              desarrollo, rendimiento y SEO, en una experiencia moderna y
+              profesional.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row items-center md:items-start gap-3">
-              <Button asChild size="lg" className="w-full sm:w-auto shadow-lg shadow-primary/30">
+              <Button
+                asChild
+                size="lg"
+                className="w-full sm:w-auto shadow-lg shadow-primary/30"
+              >
                 <Link to="/cotizaciones">
                   Cotiza tu proyecto <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
-              <Button asChild size="lg" variant="secondary" className="w-full sm:w-auto">
+              <Button
+                asChild
+                size="lg"
+                variant="secondary"
+                className="w-full sm:w-auto"
+              >
                 <Link to="/contacto">Hablar ahora</Link>
               </Button>
             </div>
           </div>
           <div className="hidden md:block md:col-span-5 relative min-h-[320px]">
             <Decorative3D />
-            <div className="absolute -right-20 -top-16 h-72 w-72 rounded-full bg-[radial-gradient(closest-side,theme(colors.primary/25),transparent)] blur-3xl" />
+            <div className="absolute -right-20 -top-16 h-72 w-72 rounded-full bg-[radial-gradient(closest-side,theme(colors.primary/25),transparent)] blur-3xl drop-shadow-[0_0_90px_hsl(var(--primary)/.35)]" />
           </div>
         </div>
       </motion.section>
@@ -108,8 +131,7 @@ export default function Index() {
           id: "tecnologia",
           kicker: "Tecnología moderna",
           title: "Desarrollo con stack actual",
-          desc:
-            "Construido con React, Tailwind y buenas prácticas para escalar de forma segura y flexible.",
+          desc: "Construido con React, Tailwind y buenas prácticas para escalar de forma segura y flexible.",
           image: "/placeholder.svg",
           icon: <Code2 className="h-5 w-5" />,
         },
@@ -117,8 +139,7 @@ export default function Index() {
           id: "rapidez",
           kicker: "Rendimiento y accesibilidad",
           title: "Velocidad que impulsa tu negocio",
-          desc:
-            "Cargas veloces, Core Web Vitals optimizados y SEO técnico para que te encuentren y conviertan.",
+          desc: "Cargas veloces, Core Web Vitals optimizados y SEO técnico para que te encuentren y conviertan.",
           image: "/placeholder.svg",
           icon: <Bolt className="h-5 w-5" />,
         },
@@ -126,8 +147,7 @@ export default function Index() {
           id: "resultados",
           kicker: "Enfocado en resultados",
           title: "Diseño que convierte",
-          desc:
-            "UX/UI orientada a objetivos con mensajes claros, jerarquía visual y llamados a la acción efectivos.",
+          desc: "UX/UI orientada a objetivos con mensajes claros, jerarquía visual y llamados a la acción efectivos.",
           image: "/placeholder.svg",
           icon: <Award className="h-5 w-5" />,
         },
@@ -135,28 +155,40 @@ export default function Index() {
         <motion.section
           key={s.id}
           id={s.id}
-          className="scroll-mt-24 mt-16 sm:mt-24 px-4"
+          className="scroll-mt-24 mt-24 md:mt-32 px-6 md:px-10"
+          style={{
+            marginLeft: "calc(50% - 50vw)",
+            marginRight: "calc(50% - 50vw)",
+          }}
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.25, ease: "easeOut" }}
         >
-          <div className="relative overflow-hidden rounded-2xl border bg-background/50 p-6 md:p-10">
+          <div className="relative overflow-hidden rounded-none bg-gradient-to-b from-background/20 to-background/0 p-12 md:p-20">
             <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[radial-gradient(closest-side,theme(colors.primary/15),transparent)] blur-3xl" />
             <div className="relative grid gap-8 md:grid-cols-12 md:items-center">
-              <div className={i % 2 === 0 ? "md:col-span-6" : "md:col-span-6 md:order-2"}>
-                <div className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs md:text-sm text-muted-foreground bg-background/60 backdrop-blur">
+              <div
+                className={
+                  i % 2 === 0 ? "md:col-span-6" : "md:col-span-6 md:order-2"
+                }
+              >
+                <div className="inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-sm md:text-base text-muted-foreground bg-background/60 backdrop-blur">
                   <span className="text-primary">{s.icon}</span> {s.kicker}
                 </div>
-                <h3 className="mt-4 text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
+                <h3 className="mt-8 text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight">
                   {s.title}
                 </h3>
-                <p className="mt-3 text-sm sm:text-base md:text-lg text-muted-foreground max-w-prose">
+                <p className="mt-6 text-lg sm:text-2xl md:text-3xl text-muted-foreground max-w-4xl">
                   {s.desc}
                 </p>
               </div>
-              <div className={i % 2 === 0 ? "md:col-span-6" : "md:col-span-6 md:order-1"}>
-                <div className="relative aspect-[16/9] w-full overflow-hidden rounded-xl border bg-background">
+              <div
+                className={
+                  i % 2 === 0 ? "md:col-span-6" : "md:col-span-6 md:order-1"
+                }
+              >
+                <div className="relative w-full overflow-hidden rounded-3xl bg-background shadow-2xl min-h-[380px] md:min-h-[520px]">
                   <img
                     src={s.image}
                     alt={s.title}
@@ -173,16 +205,22 @@ export default function Index() {
       {/* HECHO A TU MEDIDA */}
       <motion.section
         id="personalizado"
-        className="scroll-mt-24 mt-16 sm:mt-20 px-4"
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        className="scroll-mt-24 mt-24 md:mt-32 px-6 md:px-10"
+        style={{
+          marginLeft: "calc(50% - 50vw)",
+          marginRight: "calc(50% - 50vw)",
+          willChange: "opacity, transform, filter",
+        }}
+        initial={{ opacity: 0, y: 40, scale: 0.98, filter: "blur(8px)" }}
+        whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
         viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.2, ease: "easeOut" }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
       >
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-2xl md:text-3xl font-bold">Hecho a tu medida</h2>
+          <h2 className="text-3xl md:text-4xl font-bold">Hecho a tu medida</h2>
           <p className="mt-2 text-muted-foreground">
-            Cada sitio web se diseña desde cero para reflejar tu marca única, adaptándose a tus necesidades específicas y objetivos de negocio.
+            Cada sitio web se diseña desde cero para reflejar tu marca única,
+            adaptándose a tus necesidades específicas y objetivos de negocio.
           </p>
         </div>
         <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -220,21 +258,25 @@ export default function Index() {
           ].map((item, i) => (
             <motion.div
               key={i}
-              className="group relative overflow-hidden rounded-2xl border bg-background/50 p-6 hover:shadow-xl transition-all duration-300"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
+              className="group relative overflow-hidden rounded-3xl bg-background/30 p-8 md:p-10 hover:shadow-2xl transition-all duration-300 backdrop-blur"
+              initial={{ opacity: 0, y: 50, scale: 0.98, filter: "blur(6px)" }}
+              whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.6, delay: i * 0.08, ease: "easeOut" }}
               whileHover={{ scale: 1.05 }}
             >
               <div className="absolute -top-10 right-0 h-40 w-40 rounded-full bg-[radial-gradient(closest-side,theme(colors.primary/10),transparent)] blur-2xl group-hover:bg-[radial-gradient(closest-side,theme(colors.primary/20),transparent)] transition-all" />
               <div className="flex items-center gap-4">
-                <div className="grid h-12 w-12 place-items-center rounded-lg bg-gradient-to-br from-primary/10 to-violet-500/10 text-primary">
+                <div className="grid h-14 w-14 place-items-center rounded-xl bg-gradient-to-br from-primary/10 to-violet-500/10 text-primary">
                   {item.icon}
                 </div>
-                <h3 className="font-semibold text-lg">{item.title}</h3>
+                <h3 className="font-semibold text-2xl md:text-3xl">
+                  {item.title}
+                </h3>
               </div>
-              <p className="mt-4 text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+              <p className="mt-5 text-base md:text-lg text-muted-foreground leading-relaxed">
+                {item.desc}
+              </p>
             </motion.div>
           ))}
         </div>
@@ -243,14 +285,19 @@ export default function Index() {
       {/* PROCESS */}
       <motion.section
         id="proceso"
-        className="scroll-mt-24 mt-16 sm:mt-20 px-4"
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        className="scroll-mt-24 mt-24 md:mt-32 px-6 md:px-10"
+        style={{
+          marginLeft: "calc(50% - 50vw)",
+          marginRight: "calc(50% - 50vw)",
+          willChange: "opacity, transform, filter",
+        }}
+        initial={{ opacity: 0, y: 40, scale: 0.98, filter: "blur(8px)" }}
+        whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
         viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.2, ease: "easeOut" }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
       >
         <div className="max-w-4xl">
-          <h2 className="text-2xl md:text-3xl font-bold">Cómo trabajo</h2>
+          <h2 className="text-3xl md:text-4xl font-bold">Cómo trabajo</h2>
           <p className="mt-2 text-muted-foreground">
             Un proceso claro y colaborativo para llevar tu idea a producción con
             calidad.
@@ -292,9 +339,12 @@ export default function Index() {
         transition={{ duration: 0.2, ease: "easeOut" }}
       >
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-2xl md:text-3xl font-bold">Portafolio destacado</h2>
+          <h2 className="text-3xl md:text-4xl font-bold">
+            Portafolio destacado
+          </h2>
           <p className="mt-2 text-muted-foreground">
-            Algunos ejemplos de proyectos realizados con diferentes estilos y enfoques.
+            Algunos ejemplos de proyectos realizados con diferentes estilos y
+            enfoques.
           </p>
         </div>
         <div className="mt-12 grid gap-6 [grid-template-columns:repeat(auto-fit,minmax(320px,1fr))]">
@@ -326,11 +376,11 @@ export default function Index() {
               href={d.url}
               target="_blank"
               rel="noreferrer"
-              className="group relative overflow-hidden rounded-2xl border bg-background/50 p-6 hover:shadow-xl transition-all duration-300"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
+              className="group relative overflow-hidden rounded-3xl bg-background/30 p-8 md:p-10 hover:shadow-2xl transition-all duration-300 backdrop-blur"
+              initial={{ opacity: 0, y: 50, scale: 0.98, filter: "blur(6px)" }}
+              whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.6, delay: i * 0.08, ease: "easeOut" }}
               whileHover={{ scale: 1.02 }}
             >
               <div className="absolute -top-10 right-0 h-40 w-40 rounded-full bg-[radial-gradient(closest-side,theme(colors.primary/10),transparent)] blur-2xl group-hover:bg-[radial-gradient(closest-side,theme(colors.primary/20),transparent)] transition-all" />
@@ -372,21 +422,41 @@ export default function Index() {
       >
         <div className="grid gap-6 [grid-template-columns:repeat(auto-fit,minmax(150px,1fr))] max-w-4xl mx-auto">
           {[
-            { number: "50+", label: "Proyectos completados", icon: <Award className="h-6 w-6" /> },
-            { number: "100%", label: "Satisfacción cliente", icon: <Star className="h-6 w-6" /> },
-            { number: "24/7", label: "Soporte disponible", icon: <Shield className="h-6 w-6" /> },
-            { number: "3+", label: "Años de experiencia", icon: <TrendingUp className="h-6 w-6" /> },
+            {
+              number: "50+",
+              label: "Proyectos completados",
+              icon: <Award className="h-6 w-6" />,
+            },
+            {
+              number: "100%",
+              label: "Satisfacción cliente",
+              icon: <Star className="h-6 w-6" />,
+            },
+            {
+              number: "24/7",
+              label: "Soporte disponible",
+              icon: <Shield className="h-6 w-6" />,
+            },
+            {
+              number: "3+",
+              label: "Años de experiencia",
+              icon: <TrendingUp className="h-6 w-6" />,
+            },
           ].map((stat, i) => (
             <motion.div
               key={i}
               className="text-center p-6 rounded-2xl border bg-background/50"
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 30, scale: 0.98, filter: "blur(6px)" }}
+              whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
+              transition={{ duration: 0.6, delay: i * 0.08, ease: "easeOut" }}
             >
-              <div className="flex justify-center mb-2 text-primary">{stat.icon}</div>
-              <div className="text-2xl md:text-3xl font-bold">{stat.number}</div>
+              <div className="flex justify-center mb-2 text-primary">
+                {stat.icon}
+              </div>
+              <div className="text-3xl md:text-4xl font-bold">
+                {stat.number}
+              </div>
               <div className="text-sm text-muted-foreground">{stat.label}</div>
             </motion.div>
           ))}
@@ -396,13 +466,18 @@ export default function Index() {
       {/* CTA STRIP */}
       <motion.section
         id="cta"
-        className="scroll-mt-24 mt-16 sm:mt-20 px-4"
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        className="scroll-mt-24 mt-24 md:mt-32 px-6 md:px-10"
+        style={{
+          marginLeft: "calc(50% - 50vw)",
+          marginRight: "calc(50% - 50vw)",
+          willChange: "opacity, transform, filter",
+        }}
+        initial={{ opacity: 0, y: 40, scale: 0.98, filter: "blur(8px)" }}
+        whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
         viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.2, ease: "easeOut" }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
       >
-        <div className="relative overflow-hidden rounded-2xl border p-6 md:p-10 bg-gradient-to-br from-primary/10 via-violet-500/10 to-fuchsia-500/10">
+        <div className="relative overflow-hidden rounded-none p-10 md:p-16 bg-gradient-to-br from-primary/10 via-violet-500/10 to-fuchsia-500/10">
           <div className="absolute -right-20 -top-20 h-56 w-56 rounded-full bg-[radial-gradient(closest-side,theme(colors.violet.500/25),transparent)] blur-3xl" />
           <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div>

@@ -27,9 +27,7 @@ function SiteHeader() {
             alt="ARQBYTE Logo"
             className="h-10 w-10 rounded-lg"
           />
-          <span className="text-lg font-extrabold tracking-tight">
-            ARQBYTE
-          </span>
+          <span className="text-lg font-extrabold tracking-tight">ARQBYTE</span>
         </Link>
         <nav className="hidden md:flex items-center gap-6">
           {nav.map((item) => (
@@ -203,7 +201,9 @@ export default function Layout() {
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
       >
-        <div className="absolute -top-24 left-1/2 h-[40rem] w-[40rem] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,theme(colors.primary/25),transparent)] blur-3xl" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.10)_0%,transparent_60%)]" />
+        <div className="absolute left-1/2 -top-40 -translate-x-1/2 h-[80rem] w-[80rem] rounded-full bg-[radial-gradient(closest-side,theme(colors.violet.500/45),transparent)] blur-[120px] opacity-80 mix-blend-screen shadow-[0_0_200px_80px_rgba(124,58,237,0.35)]" />
+        <div className="absolute -top-24 left-1/2 h-[50rem] w-[50rem] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,theme(colors.primary/30),transparent)] blur-[100px] opacity-70" />
       </div>
       <SiteHeader />
       <ScrollProgress />
