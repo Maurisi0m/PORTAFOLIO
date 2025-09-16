@@ -18,8 +18,8 @@ import {
   Smartphone,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Typewriter } from "@/components/ui/typewriter";
 import Decorative3D from "@/components/ui/Decorative3D";
+import { Typewriter } from "@/components/ui/typewriter";
 
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -42,11 +42,12 @@ export default function Index() {
         transition={{ duration: 0.2, ease: "easeOut" }}
       >
         <div className="absolute inset-0 -z-10">
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.15)_0%,transparent_60%)]" />
           <div className="absolute left-1/2 top-0 -translate-x-1/2 h-[36rem] w-[36rem] rounded-full bg-[radial-gradient(closest-side,theme(colors.violet.500/30),transparent)] blur-3xl" />
         </div>
         <div
           ref={heroRef}
-          className="relative isolate text-center max-w-4xl mx-auto px-4"
+          className="relative isolate mx-auto px-4 max-w-6xl text-center md:text-left md:grid md:grid-cols-12 md:gap-8 md:items-center"
           onMouseMove={(e) => {
             const rect = heroRef.current?.getBoundingClientRect();
             if (!rect) return;
@@ -73,120 +74,101 @@ export default function Index() {
             }}
             transition={{ type: "spring", stiffness: 120, damping: 20 }}
           />
-          <span className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs md:text-sm text-muted-foreground bg-background/60 backdrop-blur">
-            <Sparkles className="h-3.5 w-3.5 text-primary" /> Experiencias web
-            inmersivas/estéticas
-          </span>
-          <h1 className="mt-6 text-3xl sm:text-4xl md:text-6xl font-extrabold tracking-tight leading-tight">
-            <Typewriter text="Diseña y desarrollamos tu sitio web que contará tu historia" />
-          </h1>
-          <p className="mt-4 text-sm sm:text-base md:text-lg text-muted-foreground">
-            Haz que tu marca se vea mas grande con un sitio web profesional, todo con un presupuesto accesible.
-          </p>
-          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-            <Button
-              asChild
-              size="lg"
-              className="w-full sm:w-auto shadow-lg shadow-primary/30"
-            >
-              <Link to="/cotizaciones">
-                Cotiza tu proyecto <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              variant="secondary"
-              className="w-full sm:w-auto"
-            >
-              <Link to="/demos">Ver demos</Link>
-            </Button>
-          </div>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4 text-xs sm:text-sm text-muted-foreground">
-            <div className="inline-flex items-center gap-2">
-              <Shield className="h-4 w-4" /> Seguro
-            </div>
-            <div className="inline-flex items-center gap-2">
-              <MonitorSmartphone className="h-4 w-4" /> Responsiva
-            </div>
-            <div className="inline-flex items-center gap-2">
-              <Rocket className="h-4 w-4" /> Rendimiento
+          <div className="md:col-span-7 mx-auto md:mx-0 max-w-[680px]">
+            <span className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs md:text-sm text-muted-foreground bg-background/60 backdrop-blur">
+              <Sparkles className="h-3.5 w-3.5 text-primary" /> Experiencias web inmersivas
+            </span>
+            <h1 className="mt-5 text-5xl sm:text-7xl md:text-8xl font-extrabold tracking-tight leading-[1.02] text-balance">
+              <Typewriter text="Un sitio web hace tus ideas realidad" speed={40} />
+            </h1>
+            <p className="mt-6 text-base sm:text-lg md:text-xl text-muted-foreground">
+              Todo lo que necesitas para impulsar tu negocio: diseño, desarrollo, rendimiento y SEO, en una experiencia moderna y profesional.
+            </p>
+            <div className="mt-8 flex flex-col sm:flex-row items-center md:items-start gap-3">
+              <Button asChild size="lg" className="w-full sm:w-auto shadow-lg shadow-primary/30">
+                <Link to="/cotizaciones">
+                  Cotiza tu proyecto <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+              <Button asChild size="lg" variant="secondary" className="w-full sm:w-auto">
+                <Link to="/contacto">Hablar ahora</Link>
+              </Button>
             </div>
           </div>
-
-          {/* Section quick nav */}
-          <div className="mt-8 mx-auto max-w-3xl overflow-x-auto">
-            <div className="flex items-center justify-center gap-2 sm:gap-3 w-max mx-auto">
-              <a
-                href="#servicio"
-                className="whitespace-nowrap rounded-full border px-3 py-1.5 text-sm hover:bg-accent hover:text-accent-foreground transition"
-              >
-                Servicio
-              </a>
-              <a
-                href="#personalizado"
-                className="whitespace-nowrap rounded-full border px-3 py-1.5 text-sm hover:bg-accent hover:text-accent-foreground transition"
-              >
-                Personalizado
-              </a>
-              <a
-                href="#portafolio"
-                className="whitespace-nowrap rounded-full border px-3 py-1.5 text-sm hover:bg-accent hover:text-accent-foreground transition"
-              >
-                Portafolio
-              </a>
-              <a
-                href="#cta"
-                className="whitespace-nowrap rounded-full border px-3 py-1.5 text-sm hover:bg-accent hover:text-accent-foreground transition"
-              >
-                Comenzar
-              </a>
-            </div>
+          <div className="hidden md:block md:col-span-5 relative min-h-[320px]">
+            <Decorative3D />
+            <div className="absolute -right-20 -top-16 h-72 w-72 rounded-full bg-[radial-gradient(closest-side,theme(colors.primary/25),transparent)] blur-3xl" />
           </div>
         </div>
       </motion.section>
 
-      {/* FEATURES / STORY */}
-      <motion.section
-        id="servicio"
-        className="scroll-mt-24 mt-16 sm:mt-20 grid gap-6 [grid-template-columns:repeat(auto-fit,minmax(220px,1fr))] px-4"
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.2, ease: "easeOut" }}
-      >
-        {[
-          {
-            icon: <Code2 className="h-5 w-5" />,
-            title: "Tecnología moderna",
-            desc: "Stack actualizado: React, Tailwind y buenas prácticas para escalar.",
-          },
-          {
-            icon: <Bolt className="h-5 w-5" />,
-            title: "Rápido y accesible",
-            desc: "Optimizado para velocidad, SEO y accesibilidad real.",
-          },
-          {
-            icon: <Award className="h-5 w-5" />,
-            title: "Enfocado en resultados",
-            desc: "Sitios que convierten, con un diseño que refleja tu marca.",
-          },
-        ].map((f, i) => (
-          <div
-            key={i}
-            className="group relative overflow-hidden rounded-2xl border bg-background/50 p-6 transition hover:shadow-lg"
-          >
-            <div className="absolute -top-10 right-0 h-40 w-40 rounded-full bg-[radial-gradient(closest-side,theme(colors.primary/10),transparent)] blur-2xl" />
-            <div className="flex items-center gap-3">
-              <div className="grid h-10 w-10 place-items-center rounded-lg bg-gradient-to-br from-primary/10 to-violet-500/10 text-primary">
-                {f.icon}
+      {/* FEATURES AS LARGE SECTIONS */}
+      {[
+        {
+          id: "tecnologia",
+          kicker: "Tecnología moderna",
+          title: "Desarrollo con stack actual",
+          desc:
+            "Construido con React, Tailwind y buenas prácticas para escalar de forma segura y flexible.",
+          image: "/placeholder.svg",
+          icon: <Code2 className="h-5 w-5" />,
+        },
+        {
+          id: "rapidez",
+          kicker: "Rendimiento y accesibilidad",
+          title: "Velocidad que impulsa tu negocio",
+          desc:
+            "Cargas veloces, Core Web Vitals optimizados y SEO técnico para que te encuentren y conviertan.",
+          image: "/placeholder.svg",
+          icon: <Bolt className="h-5 w-5" />,
+        },
+        {
+          id: "resultados",
+          kicker: "Enfocado en resultados",
+          title: "Diseño que convierte",
+          desc:
+            "UX/UI orientada a objetivos con mensajes claros, jerarquía visual y llamados a la acción efectivos.",
+          image: "/placeholder.svg",
+          icon: <Award className="h-5 w-5" />,
+        },
+      ].map((s, i) => (
+        <motion.section
+          key={s.id}
+          id={s.id}
+          className="scroll-mt-24 mt-16 sm:mt-24 px-4"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.25, ease: "easeOut" }}
+        >
+          <div className="relative overflow-hidden rounded-2xl border bg-background/50 p-6 md:p-10">
+            <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[radial-gradient(closest-side,theme(colors.primary/15),transparent)] blur-3xl" />
+            <div className="relative grid gap-8 md:grid-cols-12 md:items-center">
+              <div className={i % 2 === 0 ? "md:col-span-6" : "md:col-span-6 md:order-2"}>
+                <div className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs md:text-sm text-muted-foreground bg-background/60 backdrop-blur">
+                  <span className="text-primary">{s.icon}</span> {s.kicker}
+                </div>
+                <h3 className="mt-4 text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
+                  {s.title}
+                </h3>
+                <p className="mt-3 text-sm sm:text-base md:text-lg text-muted-foreground max-w-prose">
+                  {s.desc}
+                </p>
               </div>
-              <h3 className="font-semibold">{f.title}</h3>
+              <div className={i % 2 === 0 ? "md:col-span-6" : "md:col-span-6 md:order-1"}>
+                <div className="relative aspect-[16/9] w-full overflow-hidden rounded-xl border bg-background">
+                  <img
+                    src={s.image}
+                    alt={s.title}
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
             </div>
-            <p className="mt-3 text-sm text-muted-foreground">{f.desc}</p>
           </div>
-        ))}
-      </motion.section>
+        </motion.section>
+      ))}
 
       {/* HECHO A TU MEDIDA */}
       <motion.section
@@ -303,7 +285,7 @@ export default function Index() {
       {/* PORTAFOLIO PREVIEW */}
       <motion.section
         id="portafolio"
-        className="scroll-mt-24 mt-16 sm:mt-20 px-4"
+        className="hidden"
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}

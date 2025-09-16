@@ -11,7 +11,6 @@ const nav = [
   { to: "/", label: "Inicio" },
   { to: "/sobre", label: "Sobre el servicio" },
   { to: "/cotizaciones", label: "Cotizaciones" },
-  { to: "/demos", label: "Demos" },
   { to: "/faq", label: "FAQ" },
   { to: "/contacto", label: "Contacto" },
 ];
@@ -52,9 +51,6 @@ function SiteHeader() {
           <Button asChild size="sm" className="shadow-lg shadow-primary/30">
             <Link to="/cotizaciones">Cotiza ahora</Link>
           </Button>
-          <Button asChild size="sm" variant="secondary">
-            <Link to="/demos">Ver demos</Link>
-          </Button>
         </div>
         <button
           className="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-md border"
@@ -82,9 +78,6 @@ function SiteHeader() {
             <div className="flex gap-3 pt-2">
               <Button asChild size="sm" className="flex-1">
                 <Link to="/cotizaciones">Cotiza ahora</Link>
-              </Button>
-              <Button asChild size="sm" variant="secondary" className="flex-1">
-                <Link to="/demos">Ver demos</Link>
               </Button>
             </div>
           </div>
