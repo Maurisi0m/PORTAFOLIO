@@ -36,7 +36,7 @@ export default function Index() {
     <div className="pb-20">
       {/* HERO */}
       <motion.section
-        className="relative left-1/2 -translate-x-1/2 w-screen pt-24 md:pt-32"
+        className="relative pt-24 md:pt-32 px-6 md:px-10" style={{ marginLeft: "calc(50% - 50vw)", marginRight: "calc(50% - 50vw)" }}
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.2, ease: "easeOut" }}
@@ -135,7 +135,7 @@ export default function Index() {
         <motion.section
           key={s.id}
           id={s.id}
-          className="scroll-mt-24 mt-24 md:mt-32 relative left-1/2 -translate-x-1/2 w-screen"
+          className="scroll-mt-24 mt-24 md:mt-32 px-6 md:px-10" style={{ marginLeft: "calc(50% - 50vw)", marginRight: "calc(50% - 50vw)" }}
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -173,7 +173,7 @@ export default function Index() {
       {/* HECHO A TU MEDIDA */}
       <motion.section
         id="personalizado"
-        className="scroll-mt-24 mt-24 md:mt-32 px-4"
+        className="scroll-mt-24 mt-24 md:mt-32 px-6 md:px-10" style={{ marginLeft: "calc(50% - 50vw)", marginRight: "calc(50% - 50vw)" }}
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
@@ -243,7 +243,7 @@ export default function Index() {
       {/* PROCESS */}
       <motion.section
         id="proceso"
-        className="scroll-mt-24 mt-16 sm:mt-20 px-4"
+        className="scroll-mt-24 mt-24 md:mt-32 px-6 md:px-10" style={{ marginLeft: "calc(50% - 50vw)", marginRight: "calc(50% - 50vw)" }}
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
@@ -396,7 +396,7 @@ export default function Index() {
       {/* CTA STRIP */}
       <motion.section
         id="cta"
-        className="scroll-mt-24 mt-24 md:mt-32 relative left-1/2 -translate-x-1/2 w-screen"
+        className="scroll-mt-24 mt-24 md:mt-32 px-6 md:px-10" style={{ marginLeft: "calc(50% - 50vw)", marginRight: "calc(50% - 50vw)" }}
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
