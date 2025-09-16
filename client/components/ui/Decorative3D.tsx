@@ -9,7 +9,12 @@ type RotatingBoxProps = {
   speed?: [number, number];
 };
 
-function RotatingBox({ position, size, color, speed = [0.01, 0.01] }: RotatingBoxProps) {
+function RotatingBox({
+  position,
+  size,
+  color,
+  speed = [0.01, 0.01],
+}: RotatingBoxProps) {
   const mesh = useRef<Mesh>(null!);
 
   useFrame(() => {
@@ -22,19 +27,33 @@ function RotatingBox({ position, size, color, speed = [0.01, 0.01] }: RotatingBo
   return (
     <mesh ref={mesh} position={position} castShadow receiveShadow>
       <boxGeometry args={[size, size, size]} />
-      <meshStandardMaterial color={color} metalness={0.2} roughness={0.4} emissive={color} emissiveIntensity={0.08} />
+      <meshStandardMaterial
+        color={color}
+        metalness={0.2}
+        roughness={0.4}
+        emissive={color}
+        emissiveIntensity={0.08}
+      />
     </mesh>
   );
 }
 
-function FloatingWrapper({ index, children }: { index: number; children: React.ReactNode }) {
+function FloatingWrapper({
+  index,
+  children,
+}: {
+  index: number;
+  children: React.ReactNode;
+}) {
   const ref = useRef<Group | null>(null);
   useFrame(({ clock }) => {
     if (ref.current) {
       const t = clock.getElapsedTime();
       ref.current.rotation.y += 0.002 * (index + 1);
-      ref.current.position.y = Math.sin(t * (0.6 + index * 0.1)) * (0.18 + index * 0.02);
-      ref.current.position.x = Math.sin(t * (0.4 + index * 0.05)) * 0.12 * (index % 2 === 0 ? 1 : -1);
+      ref.current.position.y =
+        Math.sin(t * (0.6 + index * 0.1)) * (0.18 + index * 0.02);
+      ref.current.position.x =
+        Math.sin(t * (0.4 + index * 0.05)) * 0.12 * (index % 2 === 0 ? 1 : -1);
     }
   });
   return <group ref={ref as any}>{children}</group>;
@@ -42,11 +61,31 @@ function FloatingWrapper({ index, children }: { index: number; children: React.R
 
 export default function Decorative3D() {
   const cubes = [
-    { position: [-1.1, 0.3, 0], size: 0.55, color: "#a78bfa", speed: [0.012, 0.008] },
+    {
+      position: [-1.1, 0.3, 0],
+      size: 0.55,
+      color: "#a78bfa",
+      speed: [0.012, 0.008],
+    },
     { position: [0, 0, 0], size: 0.9, color: "#8b5cf6", speed: [0.01, 0.01] },
-    { position: [1.0, -0.1, -0.2], size: 0.5, color: "#7c3aed", speed: [0.007, 0.013] },
-    { position: [0.6, 0.8, 0.4], size: 0.4, color: "#c4b5fd", speed: [0.014, 0.009] },
-    { position: [-0.8, -0.4, 0.6], size: 0.45, color: "#a78bfa", speed: [0.009, 0.012] },
+    {
+      position: [1.0, -0.1, -0.2],
+      size: 0.5,
+      color: "#7c3aed",
+      speed: [0.007, 0.013],
+    },
+    {
+      position: [0.6, 0.8, 0.4],
+      size: 0.4,
+      color: "#c4b5fd",
+      speed: [0.014, 0.009],
+    },
+    {
+      position: [-0.8, -0.4, 0.6],
+      size: 0.45,
+      color: "#a78bfa",
+      speed: [0.009, 0.012],
+    },
   ] as const;
 
   return (
@@ -77,13 +116,22 @@ export default function Decorative3D() {
           shadow-camera-top={10}
           shadow-camera-bottom={-10}
         />
-        <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.7, 0]}>
+        <mesh
+          receiveShadow
+          rotation={[-Math.PI / 2, 0, 0]}
+          position={[0, -0.7, 0]}
+        >
           <planeGeometry args={[14, 14]} />
           <shadowMaterial opacity={0.25} />
         </mesh>
         {cubes.map((c, i) => (
           <FloatingWrapper key={i} index={i}>
-            <RotatingBox position={c.position} size={c.size} color={c.color} speed={c.speed} />
+            <RotatingBox
+              position={c.position}
+              size={c.size}
+              color={c.color}
+              speed={c.speed}
+            />
           </FloatingWrapper>
         ))}
       </Canvas>

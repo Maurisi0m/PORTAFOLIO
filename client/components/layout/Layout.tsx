@@ -27,9 +27,7 @@ function SiteHeader() {
             alt="ARQBYTE Logo"
             className="h-10 w-10 rounded-lg"
           />
-          <span className="text-lg font-extrabold tracking-tight">
-            ARQBYTE
-          </span>
+          <span className="text-lg font-extrabold tracking-tight">ARQBYTE</span>
         </Link>
         <nav className="hidden md:flex items-center gap-6">
           {nav.map((item) => (

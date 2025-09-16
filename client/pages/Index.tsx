@@ -36,7 +36,12 @@ export default function Index() {
     <div className="pb-20">
       {/* HERO */}
       <motion.section
-        className="relative pt-24 md:pt-32 px-6 md:px-10" style={{ marginLeft: "calc(50% - 50vw)", marginRight: "calc(50% - 50vw)", willChange: "opacity, transform, filter" }}
+        className="relative pt-24 md:pt-32 px-6 md:px-10"
+        style={{
+          marginLeft: "calc(50% - 50vw)",
+          marginRight: "calc(50% - 50vw)",
+          willChange: "opacity, transform, filter",
+        }}
         initial={{ opacity: 0, y: 24, scale: 0.98, filter: "blur(8px)" }}
         animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
         transition={{ duration: 0.6, ease: "easeOut" }}
@@ -73,21 +78,42 @@ export default function Index() {
           <div className="relative md:col-span-7 mx-auto md:mx-0 max-w-[900px]">
             <div className="pointer-events-none absolute -inset-x-10 -top-12 bottom-[-14rem] -z-10 rounded-[48px] bg-[radial-gradient(closest-side,theme(colors.violet.500/40),transparent)] blur-[120px] opacity-90 mix-blend-screen" />
             <span className="inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-sm md:text-base text-muted-foreground bg-background/60 backdrop-blur">
-              <Sparkles className="h-3.5 w-3.5 text-primary" /> Experiencias web inmersivas
+              <Sparkles className="h-3.5 w-3.5 text-primary" /> Experiencias web
+              inmersivas
             </span>
-            <h1 className="mt-6 text-6xl sm:text-8xl md:text-9xl font-extrabold tracking-tight leading-[1.02] text-balance" style={{ textShadow: "0 8px 30px rgba(124,58,237,.55), 0 0 80px rgba(124,58,237,.45), 0 0 160px rgba(124,58,237,.35)" }}>
-              <Typewriter text="Un sitio web hace tus ideas realidad" speed={40} />
+            <h1
+              className="mt-6 text-6xl sm:text-8xl md:text-9xl font-extrabold tracking-tight leading-[1.02] text-balance"
+              style={{
+                textShadow:
+                  "0 8px 30px rgba(124,58,237,.55), 0 0 80px rgba(124,58,237,.45), 0 0 160px rgba(124,58,237,.35)",
+              }}
+            >
+              <Typewriter
+                text="Un sitio web hace tus ideas realidad"
+                speed={40}
+              />
             </h1>
             <p className="mt-6 text-lg sm:text-2xl md:text-3xl text-muted-foreground">
-              Todo lo que necesitas para impulsar tu negocio: diseño, desarrollo, rendimiento y SEO, en una experiencia moderna y profesional.
+              Todo lo que necesitas para impulsar tu negocio: diseño,
+              desarrollo, rendimiento y SEO, en una experiencia moderna y
+              profesional.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row items-center md:items-start gap-3">
-              <Button asChild size="lg" className="w-full sm:w-auto shadow-lg shadow-primary/30">
+              <Button
+                asChild
+                size="lg"
+                className="w-full sm:w-auto shadow-lg shadow-primary/30"
+              >
                 <Link to="/cotizaciones">
                   Cotiza tu proyecto <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
-              <Button asChild size="lg" variant="secondary" className="w-full sm:w-auto">
+              <Button
+                asChild
+                size="lg"
+                variant="secondary"
+                className="w-full sm:w-auto"
+              >
                 <Link to="/contacto">Hablar ahora</Link>
               </Button>
             </div>
@@ -105,8 +131,7 @@ export default function Index() {
           id: "tecnologia",
           kicker: "Tecnología moderna",
           title: "Desarrollo con stack actual",
-          desc:
-            "Construido con React, Tailwind y buenas prácticas para escalar de forma segura y flexible.",
+          desc: "Construido con React, Tailwind y buenas prácticas para escalar de forma segura y flexible.",
           image: "/placeholder.svg",
           icon: <Code2 className="h-5 w-5" />,
         },
@@ -114,8 +139,7 @@ export default function Index() {
           id: "rapidez",
           kicker: "Rendimiento y accesibilidad",
           title: "Velocidad que impulsa tu negocio",
-          desc:
-            "Cargas veloces, Core Web Vitals optimizados y SEO técnico para que te encuentren y conviertan.",
+          desc: "Cargas veloces, Core Web Vitals optimizados y SEO técnico para que te encuentren y conviertan.",
           image: "/placeholder.svg",
           icon: <Bolt className="h-5 w-5" />,
         },
@@ -123,8 +147,7 @@ export default function Index() {
           id: "resultados",
           kicker: "Enfocado en resultados",
           title: "Diseño que convierte",
-          desc:
-            "UX/UI orientada a objetivos con mensajes claros, jerarquía visual y llamados a la acción efectivos.",
+          desc: "UX/UI orientada a objetivos con mensajes claros, jerarquía visual y llamados a la acción efectivos.",
           image: "/placeholder.svg",
           icon: <Award className="h-5 w-5" />,
         },
@@ -132,7 +155,11 @@ export default function Index() {
         <motion.section
           key={s.id}
           id={s.id}
-          className="scroll-mt-24 mt-24 md:mt-32 px-6 md:px-10" style={{ marginLeft: "calc(50% - 50vw)", marginRight: "calc(50% - 50vw)" }}
+          className="scroll-mt-24 mt-24 md:mt-32 px-6 md:px-10"
+          style={{
+            marginLeft: "calc(50% - 50vw)",
+            marginRight: "calc(50% - 50vw)",
+          }}
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -141,7 +168,11 @@ export default function Index() {
           <div className="relative overflow-hidden rounded-none bg-gradient-to-b from-background/20 to-background/0 p-12 md:p-20">
             <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[radial-gradient(closest-side,theme(colors.primary/15),transparent)] blur-3xl" />
             <div className="relative grid gap-8 md:grid-cols-12 md:items-center">
-              <div className={i % 2 === 0 ? "md:col-span-6" : "md:col-span-6 md:order-2"}>
+              <div
+                className={
+                  i % 2 === 0 ? "md:col-span-6" : "md:col-span-6 md:order-2"
+                }
+              >
                 <div className="inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-sm md:text-base text-muted-foreground bg-background/60 backdrop-blur">
                   <span className="text-primary">{s.icon}</span> {s.kicker}
                 </div>
@@ -152,7 +183,11 @@ export default function Index() {
                   {s.desc}
                 </p>
               </div>
-              <div className={i % 2 === 0 ? "md:col-span-6" : "md:col-span-6 md:order-1"}>
+              <div
+                className={
+                  i % 2 === 0 ? "md:col-span-6" : "md:col-span-6 md:order-1"
+                }
+              >
                 <div className="relative w-full overflow-hidden rounded-3xl bg-background shadow-2xl min-h-[380px] md:min-h-[520px]">
                   <img
                     src={s.image}
@@ -170,7 +205,12 @@ export default function Index() {
       {/* HECHO A TU MEDIDA */}
       <motion.section
         id="personalizado"
-        className="scroll-mt-24 mt-24 md:mt-32 px-6 md:px-10" style={{ marginLeft: "calc(50% - 50vw)", marginRight: "calc(50% - 50vw)", willChange: "opacity, transform, filter" }}
+        className="scroll-mt-24 mt-24 md:mt-32 px-6 md:px-10"
+        style={{
+          marginLeft: "calc(50% - 50vw)",
+          marginRight: "calc(50% - 50vw)",
+          willChange: "opacity, transform, filter",
+        }}
         initial={{ opacity: 0, y: 40, scale: 0.98, filter: "blur(8px)" }}
         whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
         viewport={{ once: true, margin: "-100px" }}
@@ -179,7 +219,8 @@ export default function Index() {
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold">Hecho a tu medida</h2>
           <p className="mt-2 text-muted-foreground">
-            Cada sitio web se diseña desde cero para reflejar tu marca única, adaptándose a tus necesidades específicas y objetivos de negocio.
+            Cada sitio web se diseña desde cero para reflejar tu marca única,
+            adaptándose a tus necesidades específicas y objetivos de negocio.
           </p>
         </div>
         <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -229,9 +270,13 @@ export default function Index() {
                 <div className="grid h-14 w-14 place-items-center rounded-xl bg-gradient-to-br from-primary/10 to-violet-500/10 text-primary">
                   {item.icon}
                 </div>
-                <h3 className="font-semibold text-2xl md:text-3xl">{item.title}</h3>
+                <h3 className="font-semibold text-2xl md:text-3xl">
+                  {item.title}
+                </h3>
               </div>
-              <p className="mt-5 text-base md:text-lg text-muted-foreground leading-relaxed">{item.desc}</p>
+              <p className="mt-5 text-base md:text-lg text-muted-foreground leading-relaxed">
+                {item.desc}
+              </p>
             </motion.div>
           ))}
         </div>
@@ -240,7 +285,12 @@ export default function Index() {
       {/* PROCESS */}
       <motion.section
         id="proceso"
-        className="scroll-mt-24 mt-24 md:mt-32 px-6 md:px-10" style={{ marginLeft: "calc(50% - 50vw)", marginRight: "calc(50% - 50vw)", willChange: "opacity, transform, filter" }}
+        className="scroll-mt-24 mt-24 md:mt-32 px-6 md:px-10"
+        style={{
+          marginLeft: "calc(50% - 50vw)",
+          marginRight: "calc(50% - 50vw)",
+          willChange: "opacity, transform, filter",
+        }}
         initial={{ opacity: 0, y: 40, scale: 0.98, filter: "blur(8px)" }}
         whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
         viewport={{ once: true, margin: "-100px" }}
@@ -289,9 +339,12 @@ export default function Index() {
         transition={{ duration: 0.2, ease: "easeOut" }}
       >
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold">Portafolio destacado</h2>
+          <h2 className="text-3xl md:text-4xl font-bold">
+            Portafolio destacado
+          </h2>
           <p className="mt-2 text-muted-foreground">
-            Algunos ejemplos de proyectos realizados con diferentes estilos y enfoques.
+            Algunos ejemplos de proyectos realizados con diferentes estilos y
+            enfoques.
           </p>
         </div>
         <div className="mt-12 grid gap-6 [grid-template-columns:repeat(auto-fit,minmax(320px,1fr))]">
@@ -369,10 +422,26 @@ export default function Index() {
       >
         <div className="grid gap-6 [grid-template-columns:repeat(auto-fit,minmax(150px,1fr))] max-w-4xl mx-auto">
           {[
-            { number: "50+", label: "Proyectos completados", icon: <Award className="h-6 w-6" /> },
-            { number: "100%", label: "Satisfacción cliente", icon: <Star className="h-6 w-6" /> },
-            { number: "24/7", label: "Soporte disponible", icon: <Shield className="h-6 w-6" /> },
-            { number: "3+", label: "Años de experiencia", icon: <TrendingUp className="h-6 w-6" /> },
+            {
+              number: "50+",
+              label: "Proyectos completados",
+              icon: <Award className="h-6 w-6" />,
+            },
+            {
+              number: "100%",
+              label: "Satisfacción cliente",
+              icon: <Star className="h-6 w-6" />,
+            },
+            {
+              number: "24/7",
+              label: "Soporte disponible",
+              icon: <Shield className="h-6 w-6" />,
+            },
+            {
+              number: "3+",
+              label: "Años de experiencia",
+              icon: <TrendingUp className="h-6 w-6" />,
+            },
           ].map((stat, i) => (
             <motion.div
               key={i}
@@ -382,8 +451,12 @@ export default function Index() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.08, ease: "easeOut" }}
             >
-              <div className="flex justify-center mb-2 text-primary">{stat.icon}</div>
-              <div className="text-3xl md:text-4xl font-bold">{stat.number}</div>
+              <div className="flex justify-center mb-2 text-primary">
+                {stat.icon}
+              </div>
+              <div className="text-3xl md:text-4xl font-bold">
+                {stat.number}
+              </div>
               <div className="text-sm text-muted-foreground">{stat.label}</div>
             </motion.div>
           ))}
@@ -393,7 +466,12 @@ export default function Index() {
       {/* CTA STRIP */}
       <motion.section
         id="cta"
-        className="scroll-mt-24 mt-24 md:mt-32 px-6 md:px-10" style={{ marginLeft: "calc(50% - 50vw)", marginRight: "calc(50% - 50vw)", willChange: "opacity, transform, filter" }}
+        className="scroll-mt-24 mt-24 md:mt-32 px-6 md:px-10"
+        style={{
+          marginLeft: "calc(50% - 50vw)",
+          marginRight: "calc(50% - 50vw)",
+          willChange: "opacity, transform, filter",
+        }}
         initial={{ opacity: 0, y: 40, scale: 0.98, filter: "blur(8px)" }}
         whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
         viewport={{ once: true, margin: "-100px" }}
