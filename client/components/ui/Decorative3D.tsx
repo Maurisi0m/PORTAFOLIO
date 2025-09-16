@@ -1,7 +1,6 @@
 import React, { useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Float } from "@react-three/drei";
-import type { Mesh } from "three";
+import type { Mesh, Group } from "three";
 
 type RotatingBoxProps = {
   position: [number, number, number];
@@ -26,6 +25,19 @@ function RotatingBox({ position, size, color, speed = [0.01, 0.01] }: RotatingBo
       <meshStandardMaterial color={color} metalness={0.2} roughness={0.4} emissive={color} emissiveIntensity={0.08} />
     </mesh>
   );
+}
+
+function FloatingWrapper({ index, children }: { index: number; children: React.ReactNode }) {
+  const ref = useRef<Group | null>(null);
+  useFrame(({ clock }) => {
+    if (ref.current) {
+      const t = clock.getElapsedTime();
+      ref.current.rotation.y += 0.002 * (index + 1);
+      ref.current.position.y = Math.sin(t * (0.6 + index * 0.1)) * (0.18 + index * 0.02);
+      ref.current.position.x = Math.sin(t * (0.4 + index * 0.05)) * 0.12 * (index % 2 === 0 ? 1 : -1);
+    }
+  });
+  return <group ref={ref as any}>{children}</group>;
 }
 
 export default function Decorative3D() {
@@ -70,9 +82,9 @@ export default function Decorative3D() {
           <shadowMaterial opacity={0.25} />
         </mesh>
         {cubes.map((c, i) => (
-          <Float key={i} speed={2} rotationIntensity={0.6} floatIntensity={1.4}>
+          <FloatingWrapper key={i} index={i}>
             <RotatingBox position={c.position} size={c.size} color={c.color} speed={c.speed} />
-          </Float>
+          </FloatingWrapper>
         ))}
       </Canvas>
     </div>
