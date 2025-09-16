@@ -41,10 +41,6 @@ export default function Index() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.2, ease: "easeOut" }}
       >
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.15)_0%,transparent_60%)]" />
-          <div className="absolute left-1/2 top-0 -translate-x-1/2 h-[48rem] w-[48rem] rounded-full bg-[radial-gradient(closest-side,theme(colors.violet.500/30),transparent)] blur-3xl" />
-        </div>
         <div
           ref={heroRef}
           className="relative isolate mx-auto px-6 md:px-10 max-w-7xl text-center md:text-left md:grid md:grid-cols-12 md:gap-10 md:items-center"
@@ -60,7 +56,7 @@ export default function Index() {
           onMouseLeave={() => setCursor((p) => ({ ...p, active: false }))}
         >
           <motion.div
-            className="pointer-events-none absolute -z-10 h-40 w-40 sm:h-64 sm:w-64 -translate-x-1/2 -translate-y-1/2 rounded-full blur-2xl"
+            className="pointer-events-none absolute -z-10 h-40 w-40 sm:h-64 sm:w-64 -translate-x-1/2 -translate-y-1/2 rounded-full blur-2xl drop-shadow-[0_0_80px_hsl(var(--primary)/.35)] shadow-2xl shadow-primary/30"
             style={{
               left: cursor.x,
               top: cursor.y,
@@ -97,7 +93,7 @@ export default function Index() {
           </div>
           <div className="hidden md:block md:col-span-5 relative min-h-[320px]">
             <Decorative3D />
-            <div className="absolute -right-20 -top-16 h-72 w-72 rounded-full bg-[radial-gradient(closest-side,theme(colors.primary/25),transparent)] blur-3xl" />
+            <div className="absolute -right-20 -top-16 h-72 w-72 rounded-full bg-[radial-gradient(closest-side,theme(colors.primary/25),transparent)] blur-3xl drop-shadow-[0_0_90px_hsl(var(--primary)/.35)]" />
           </div>
         </div>
       </motion.section>
