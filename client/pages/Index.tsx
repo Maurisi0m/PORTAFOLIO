@@ -70,11 +70,12 @@ export default function Index() {
             }}
             transition={{ type: "spring", stiffness: 120, damping: 20 }}
           />
-          <div className="md:col-span-7 mx-auto md:mx-0 max-w-[900px]">
+          <div className="relative md:col-span-7 mx-auto md:mx-0 max-w-[900px]">
+            <div className="pointer-events-none absolute -inset-x-10 -top-12 bottom-[-14rem] -z-10 rounded-[48px] bg-[radial-gradient(closest-side,theme(colors.violet.500/40),transparent)] blur-[120px] opacity-90 mix-blend-screen" />
             <span className="inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-sm md:text-base text-muted-foreground bg-background/60 backdrop-blur">
               <Sparkles className="h-3.5 w-3.5 text-primary" /> Experiencias web inmersivas
             </span>
-            <h1 className="mt-6 text-6xl sm:text-8xl md:text-9xl font-extrabold tracking-tight leading-[1.02] text-balance">
+            <h1 className="mt-6 text-6xl sm:text-8xl md:text-9xl font-extrabold tracking-tight leading-[1.02] text-balance" style={{ textShadow: "0 8px 30px rgba(124,58,237,.55), 0 0 80px rgba(124,58,237,.45), 0 0 160px rgba(124,58,237,.35)" }}>
               <Typewriter text="Un sitio web hace tus ideas realidad" speed={40} />
             </h1>
             <p className="mt-6 text-lg sm:text-2xl md:text-3xl text-muted-foreground">
