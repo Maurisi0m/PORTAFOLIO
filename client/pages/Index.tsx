@@ -36,18 +36,18 @@ export default function Index() {
     <div className="pb-20">
       {/* HERO */}
       <motion.section
-        className="relative pt-16 md:pt-24"
+        className="relative left-1/2 -translate-x-1/2 w-screen pt-24 md:pt-32"
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.2, ease: "easeOut" }}
       >
         <div className="absolute inset-0 -z-10">
           <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.15)_0%,transparent_60%)]" />
-          <div className="absolute left-1/2 top-0 -translate-x-1/2 h-[36rem] w-[36rem] rounded-full bg-[radial-gradient(closest-side,theme(colors.violet.500/30),transparent)] blur-3xl" />
+          <div className="absolute left-1/2 top-0 -translate-x-1/2 h-[48rem] w-[48rem] rounded-full bg-[radial-gradient(closest-side,theme(colors.violet.500/30),transparent)] blur-3xl" />
         </div>
         <div
           ref={heroRef}
-          className="relative isolate mx-auto px-4 max-w-6xl text-center md:text-left md:grid md:grid-cols-12 md:gap-8 md:items-center"
+          className="relative isolate mx-auto px-6 md:px-10 max-w-7xl text-center md:text-left md:grid md:grid-cols-12 md:gap-10 md:items-center"
           onMouseMove={(e) => {
             const rect = heroRef.current?.getBoundingClientRect();
             if (!rect) return;
@@ -74,14 +74,14 @@ export default function Index() {
             }}
             transition={{ type: "spring", stiffness: 120, damping: 20 }}
           />
-          <div className="md:col-span-7 mx-auto md:mx-0 max-w-[680px]">
+          <div className="md:col-span-7 mx-auto md:mx-0 max-w-[900px]">
             <span className="inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-sm md:text-base text-muted-foreground bg-background/60 backdrop-blur">
               <Sparkles className="h-3.5 w-3.5 text-primary" /> Experiencias web inmersivas
             </span>
-            <h1 className="mt-5 text-5xl sm:text-7xl md:text-8xl font-extrabold tracking-tight leading-[1.02] text-balance">
+            <h1 className="mt-6 text-6xl sm:text-8xl md:text-9xl font-extrabold tracking-tight leading-[1.02] text-balance">
               <Typewriter text="Un sitio web hace tus ideas realidad" speed={40} />
             </h1>
-            <p className="mt-6 text-base sm:text-lg md:text-xl text-muted-foreground">
+            <p className="mt-6 text-lg sm:text-2xl md:text-3xl text-muted-foreground">
               Todo lo que necesitas para impulsar tu negocio: diseño, desarrollo, rendimiento y SEO, en una experiencia moderna y profesional.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row items-center md:items-start gap-3">
@@ -135,28 +135,28 @@ export default function Index() {
         <motion.section
           key={s.id}
           id={s.id}
-          className="scroll-mt-24 mt-16 sm:mt-24 px-4"
+          className="scroll-mt-24 mt-24 md:mt-32 relative left-1/2 -translate-x-1/2 w-screen"
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.25, ease: "easeOut" }}
         >
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-b from-background/20 to-background/0 p-8 md:p-14">
+          <div className="relative overflow-hidden rounded-none bg-gradient-to-b from-background/20 to-background/0 p-12 md:p-20">
             <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[radial-gradient(closest-side,theme(colors.primary/15),transparent)] blur-3xl" />
             <div className="relative grid gap-8 md:grid-cols-12 md:items-center">
               <div className={i % 2 === 0 ? "md:col-span-6" : "md:col-span-6 md:order-2"}>
                 <div className="inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-sm md:text-base text-muted-foreground bg-background/60 backdrop-blur">
                   <span className="text-primary">{s.icon}</span> {s.kicker}
                 </div>
-                <h3 className="mt-6 text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight">
+                <h3 className="mt-8 text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight">
                   {s.title}
                 </h3>
-                <p className="mt-4 text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl">
+                <p className="mt-6 text-lg sm:text-2xl md:text-3xl text-muted-foreground max-w-4xl">
                   {s.desc}
                 </p>
               </div>
               <div className={i % 2 === 0 ? "md:col-span-6" : "md:col-span-6 md:order-1"}>
-                <div className="relative aspect-[21/9] w-full overflow-hidden rounded-3xl bg-background shadow-2xl">
+                <div className="relative w-full overflow-hidden rounded-3xl bg-background shadow-2xl min-h-[380px] md:min-h-[520px]">
                   <img
                     src={s.image}
                     alt={s.title}
@@ -173,14 +173,14 @@ export default function Index() {
       {/* HECHO A TU MEDIDA */}
       <motion.section
         id="personalizado"
-        className="scroll-mt-24 mt-16 sm:mt-20 px-4"
+        className="scroll-mt-24 mt-24 md:mt-32 px-4"
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.2, ease: "easeOut" }}
       >
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-2xl md:text-3xl font-bold">Hecho a tu medida</h2>
+          <h2 className="text-3xl md:text-4xl font-bold">Hecho a tu medida</h2>
           <p className="mt-2 text-muted-foreground">
             Cada sitio web se diseña desde cero para reflejar tu marca única, adaptándose a tus necesidades específicas y objetivos de negocio.
           </p>
@@ -250,7 +250,7 @@ export default function Index() {
         transition={{ duration: 0.2, ease: "easeOut" }}
       >
         <div className="max-w-4xl">
-          <h2 className="text-2xl md:text-3xl font-bold">Cómo trabajo</h2>
+          <h2 className="text-3xl md:text-4xl font-bold">Cómo trabajo</h2>
           <p className="mt-2 text-muted-foreground">
             Un proceso claro y colaborativo para llevar tu idea a producción con
             calidad.
@@ -292,7 +292,7 @@ export default function Index() {
         transition={{ duration: 0.2, ease: "easeOut" }}
       >
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-2xl md:text-3xl font-bold">Portafolio destacado</h2>
+          <h2 className="text-3xl md:text-4xl font-bold">Portafolio destacado</h2>
           <p className="mt-2 text-muted-foreground">
             Algunos ejemplos de proyectos realizados con diferentes estilos y enfoques.
           </p>
@@ -386,7 +386,7 @@ export default function Index() {
               transition={{ duration: 0.5, delay: i * 0.1 }}
             >
               <div className="flex justify-center mb-2 text-primary">{stat.icon}</div>
-              <div className="text-2xl md:text-3xl font-bold">{stat.number}</div>
+              <div className="text-3xl md:text-4xl font-bold">{stat.number}</div>
               <div className="text-sm text-muted-foreground">{stat.label}</div>
             </motion.div>
           ))}
@@ -396,13 +396,13 @@ export default function Index() {
       {/* CTA STRIP */}
       <motion.section
         id="cta"
-        className="scroll-mt-24 mt-16 sm:mt-20 px-4"
+        className="scroll-mt-24 mt-24 md:mt-32 relative left-1/2 -translate-x-1/2 w-screen"
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.2, ease: "easeOut" }}
       >
-        <div className="relative overflow-hidden rounded-2xl border p-6 md:p-10 bg-gradient-to-br from-primary/10 via-violet-500/10 to-fuchsia-500/10">
+        <div className="relative overflow-hidden rounded-none p-10 md:p-16 bg-gradient-to-br from-primary/10 via-violet-500/10 to-fuchsia-500/10">
           <div className="absolute -right-20 -top-20 h-56 w-56 rounded-full bg-[radial-gradient(closest-side,theme(colors.violet.500/25),transparent)] blur-3xl" />
           <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div>
