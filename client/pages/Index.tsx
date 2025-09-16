@@ -36,10 +36,10 @@ export default function Index() {
     <div className="pb-20">
       {/* HERO */}
       <motion.section
-        className="relative pt-24 md:pt-32 px-6 md:px-10" style={{ marginLeft: "calc(50% - 50vw)", marginRight: "calc(50% - 50vw)" }}
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.2, ease: "easeOut" }}
+        className="relative pt-24 md:pt-32 px-6 md:px-10" style={{ marginLeft: "calc(50% - 50vw)", marginRight: "calc(50% - 50vw)", willChange: "opacity, transform, filter" }}
+        initial={{ opacity: 0, y: 24, scale: 0.98, filter: "blur(8px)" }}
+        animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
       >
         <div
           ref={heroRef}
@@ -170,11 +170,11 @@ export default function Index() {
       {/* HECHO A TU MEDIDA */}
       <motion.section
         id="personalizado"
-        className="scroll-mt-24 mt-24 md:mt-32 px-6 md:px-10" style={{ marginLeft: "calc(50% - 50vw)", marginRight: "calc(50% - 50vw)" }}
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        className="scroll-mt-24 mt-24 md:mt-32 px-6 md:px-10" style={{ marginLeft: "calc(50% - 50vw)", marginRight: "calc(50% - 50vw)", willChange: "opacity, transform, filter" }}
+        initial={{ opacity: 0, y: 40, scale: 0.98, filter: "blur(8px)" }}
+        whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
         viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.2, ease: "easeOut" }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
       >
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold">Hecho a tu medida</h2>
@@ -218,10 +218,10 @@ export default function Index() {
             <motion.div
               key={i}
               className="group relative overflow-hidden rounded-3xl bg-background/30 p-8 md:p-10 hover:shadow-2xl transition-all duration-300 backdrop-blur"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
+              initial={{ opacity: 0, y: 50, scale: 0.98, filter: "blur(6px)" }}
+              whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.6, delay: i * 0.08, ease: "easeOut" }}
               whileHover={{ scale: 1.05 }}
             >
               <div className="absolute -top-10 right-0 h-40 w-40 rounded-full bg-[radial-gradient(closest-side,theme(colors.primary/10),transparent)] blur-2xl group-hover:bg-[radial-gradient(closest-side,theme(colors.primary/20),transparent)] transition-all" />
@@ -240,11 +240,11 @@ export default function Index() {
       {/* PROCESS */}
       <motion.section
         id="proceso"
-        className="scroll-mt-24 mt-24 md:mt-32 px-6 md:px-10" style={{ marginLeft: "calc(50% - 50vw)", marginRight: "calc(50% - 50vw)" }}
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        className="scroll-mt-24 mt-24 md:mt-32 px-6 md:px-10" style={{ marginLeft: "calc(50% - 50vw)", marginRight: "calc(50% - 50vw)", willChange: "opacity, transform, filter" }}
+        initial={{ opacity: 0, y: 40, scale: 0.98, filter: "blur(8px)" }}
+        whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
         viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.2, ease: "easeOut" }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
       >
         <div className="max-w-4xl">
           <h2 className="text-3xl md:text-4xl font-bold">Cómo trabajo</h2>
@@ -324,10 +324,10 @@ export default function Index() {
               target="_blank"
               rel="noreferrer"
               className="group relative overflow-hidden rounded-3xl bg-background/30 p-8 md:p-10 hover:shadow-2xl transition-all duration-300 backdrop-blur"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
+              initial={{ opacity: 0, y: 50, scale: 0.98, filter: "blur(6px)" }}
+              whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.6, delay: i * 0.08, ease: "easeOut" }}
               whileHover={{ scale: 1.02 }}
             >
               <div className="absolute -top-10 right-0 h-40 w-40 rounded-full bg-[radial-gradient(closest-side,theme(colors.primary/10),transparent)] blur-2xl group-hover:bg-[radial-gradient(closest-side,theme(colors.primary/20),transparent)] transition-all" />
@@ -377,10 +377,10 @@ export default function Index() {
             <motion.div
               key={i}
               className="text-center p-6 rounded-2xl border bg-background/50"
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 30, scale: 0.98, filter: "blur(6px)" }}
+              whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
+              transition={{ duration: 0.6, delay: i * 0.08, ease: "easeOut" }}
             >
               <div className="flex justify-center mb-2 text-primary">{stat.icon}</div>
               <div className="text-3xl md:text-4xl font-bold">{stat.number}</div>
@@ -393,11 +393,11 @@ export default function Index() {
       {/* CTA STRIP */}
       <motion.section
         id="cta"
-        className="scroll-mt-24 mt-24 md:mt-32 px-6 md:px-10" style={{ marginLeft: "calc(50% - 50vw)", marginRight: "calc(50% - 50vw)" }}
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        className="scroll-mt-24 mt-24 md:mt-32 px-6 md:px-10" style={{ marginLeft: "calc(50% - 50vw)", marginRight: "calc(50% - 50vw)", willChange: "opacity, transform, filter" }}
+        initial={{ opacity: 0, y: 40, scale: 0.98, filter: "blur(8px)" }}
+        whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
         viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.2, ease: "easeOut" }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
       >
         <div className="relative overflow-hidden rounded-none p-10 md:p-16 bg-gradient-to-br from-primary/10 via-violet-500/10 to-fuchsia-500/10">
           <div className="absolute -right-20 -top-20 h-56 w-56 rounded-full bg-[radial-gradient(closest-side,theme(colors.violet.500/25),transparent)] blur-3xl" />
